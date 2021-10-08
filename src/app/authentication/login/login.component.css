@@ -1,0 +1,120 @@
+
+.container{
+  height: 100vh;
+  width: 100vw;
+
+
+}
+
+input,
+textarea {
+  background-color: #FFFFFF;
+  border-radius: 50px;
+  padding: 12px 15px 12px 15px;
+  width: 100%;
+  box-sizing: border-box;
+  border: none ;
+  border: 1px solid #F3E5F5 ;
+  font-size: 16px;
+  color: #000 ;
+  font-weight: 400
+}
+
+.card {
+  border-radius: 0;
+  border: none
+}
+
+.card1 {
+  width: 50%;
+  padding: 40px 30px 10px 30px
+}
+
+.card2 {
+  width: 50%;
+
+}
+
+#logo {
+  width: 70px;
+  height: 60px
+}
+
+.heading {
+  margin-bottom: 60px !important
+}
+
+::placeholder {
+  color: #000 !important;
+  opacity: 1
+}
+
+:-ms-input-placeholder {
+  color: #000 !important
+}
+
+::-ms-input-placeholder {
+  color: #000 !important
+}
+
+.form-control-label {
+  font-size: 12px;
+  margin-left: 15px
+}
+
+.msg-info {
+  padding-left: 15px;
+  margin-bottom: 30px
+}
+
+.btn-color {
+  border-radius: 50px;
+  color: #fff;
+  background-image: linear-gradient(to right, #FFD54F, #476930);
+  padding: 15px;
+  cursor: pointer;
+  border: none ;
+  margin-top: 40px
+}
+
+.btn-color:hover {
+  color: #fff;
+  background-image: linear-gradient(to right, #476930, #FFD54F)
+}
+
+.btn-white {
+  border-radius: 50px;
+  color: #476930;
+  background-color: #fff;
+  padding: 8px 40px;
+  cursor: pointer;
+  border: 2px solid #476930 !important
+}
+
+.btn-white:hover {
+  color: #fff;
+  background-image: linear-gradient(to right, #FFD54F, #476930)
+}
+
+a {
+  color: #000
+}
+
+.input-group-prepend span{
+  background-color: #FFFFFF;
+
+  padding: 12px 15px 12px 15px;
+  width: 100%;
+  box-sizing: border-box;
+  border: none ;
+  border: 1px solid #F3E5F5 ;
+  font-size: 16px;
+  color: #000 ;
+  font-weight: 400
+}
+
+
+
+
+
+
