@@ -1,0 +1,10 @@
+
+.btn-color {
+  border-radius: 50px;
+  color: #fff;
+  background-image: linear-gradient(to right, #FFD54F, #476930);
+  padding: 15px;
+  cursor: pointer;
+  border: none ;
+  margin-top: 40px
+}
