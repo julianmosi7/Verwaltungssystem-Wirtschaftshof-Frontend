@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <img class="img-responsive" width="50px" href="/home" src="assets/wappen.gif" alt="RememberCalendarSymbol">
+  <a class="navbar-brand" href="/home">Verwaltungssoftware Wirtschaftshof</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li>
+        <a class="nav-link" routerLink="/home">Startseite<span class="sr-only"></span></a>
+      </li>
+      <li>
+        <a class="nav-link" routerLink="/newAppointment">Auftragserfassung<span class="sr-only"></span></a>
+      </li>
+      <li>
+        <a class="nav-link" routerLink="/addPersonToAppointment">Auftragszuweisung<span class="sr-only"></span></a>
+      </li>
+    </ul>
+  </div>
+  <!--<a class="nav-link" (click)="showUser()" )>User</a>-->
+  <button routerLink="/login" style="margin-right: 30px" class="btn btn-danger" (click)="logout()">Abmelden</button>
+</nav>
