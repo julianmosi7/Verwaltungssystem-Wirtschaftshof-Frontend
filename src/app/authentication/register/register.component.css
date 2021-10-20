@@ -8,3 +8,22 @@
   border: none ;
   margin-top: 40px
 }
+
+input,
+textarea {
+  background-color: #FFFFFF;
+  border-radius: 50px;
+  padding: 12px 15px 12px 15px;
+  width: 100%;
+  border: none ;
+  border: 1px solid #F3E5F5 ;
+  font-size: 16px;
+  color: #000 ;
+  font-weight: 400
+}
+
+span{
+  border-radius: 50px 0px 0px 50px;
+}
+
+

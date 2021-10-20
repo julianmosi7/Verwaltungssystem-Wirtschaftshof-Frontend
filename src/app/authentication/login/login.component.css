@@ -2,8 +2,6 @@
 .container{
   height: 100vh;
   width: 100vw;
-
-
 }
 
 input,
@@ -111,6 +109,10 @@ a {
   font-size: 16px;
   color: #000 ;
   font-weight: 400
+}
+
+span{
+  border-radius: 50px 0px 0px 50px;
 }
 
 
