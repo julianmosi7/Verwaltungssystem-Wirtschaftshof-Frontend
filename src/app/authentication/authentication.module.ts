@@ -4,7 +4,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {RouterModule} from '@angular/router';
 import { AuftragszuweisungComponent } from '../auftragszuweisung/auftragszuweisung.component';
-import {AppModule} from "../app.module";
+import {AppModule} from '../app.module';
+
 
 
 
@@ -13,7 +14,9 @@ import {AppModule} from "../app.module";
   imports: [
     CommonModule,
     RouterModule,
-    AppModule
+    AppModule,
+
+
   ]
 })
 export class AuthenticationModule { }

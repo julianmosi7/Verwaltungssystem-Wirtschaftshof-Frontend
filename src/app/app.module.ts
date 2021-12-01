@@ -12,6 +12,8 @@ import { AuftragserfassungComponent } from './auftragserfassung/auftragserfassun
 import {AuftragszuweisungComponent} from './auftragszuweisung/auftragszuweisung.component';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +21,7 @@ import {AuftragszuweisungComponent} from './auftragszuweisung/auftragszuweisung.
     NavbarComponent,
     AuftragserfassungComponent,
     AuftragszuweisungComponent,
+
 
   ],
   imports: [

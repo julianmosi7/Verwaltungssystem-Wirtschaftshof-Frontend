@@ -73,6 +73,7 @@
     >
     </mwl-calendar-month-view>
     <mwl-calendar-week-view
+
       *ngSwitchCase="CalendarView.Week"
       [viewDate]="viewDate"
       [events]="events"
@@ -83,7 +84,7 @@
     </mwl-calendar-week-view>
     <mwl-calendar-day-view
       *ngSwitchCase="CalendarView.Day"
-      [viewDate]="viewDate"
+      [viewDate]="   viewDate"
       [events]="events"
       [refresh]="refresh"
       (eventClicked)="handleEvent('Clicked', $event.event)"
@@ -92,14 +93,12 @@
     </mwl-calendar-day-view>
   </div>
 
-  <!-- Everything you see below is just for the demo, you don't need to include it in your app -->
-
   <br /><br /><br />
 
   <h3>
-    Edit events
+    Auftrag bearbeiten
     <button class="btn btn-primary float-right" (click)="addEvent()">
-      Add new
+      Neues Event
     </button>
     <div class="clearfix"></div>
   </h3>
@@ -108,12 +107,12 @@
     <table class="table table-bordered">
       <thead>
       <tr>
-        <th>Title</th>
+        <th>Titel</th>
         <th>Primary color</th>
         <th>Secondary color</th>
-        <th>Starts at</th>
-        <th>Ends at</th>
-        <th>Remove</th>
+        <th>Beginnt am</th>
+        <th>Endet am</th>
+        <th>Löschen</th>
       </tr>
       </thead>
 
@@ -173,37 +172,39 @@
         </td>
         <td>
           <button class="btn btn-danger" (click)="deleteEvent(event)">
-            Delete
+            Löschen
           </button>
         </td>
       </tr>
       </tbody>
     </table>
+
+    <ng-template #modalContent let-close="close">
+      <div class="modal-header">
+        <h5 class="modal-title">Event action occurred</h5>
+        <button type="button" class="close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          Action:
+          <pre>{{ modalData?.action }}</pre>
+        </div>
+        <div>
+          Event:
+          <pre>{{ modalData?.event | json }}</pre>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="close()">
+          OK
+        </button>
+      </div>
+    </ng-template>
   </div>
 
-  <ng-template #modalContent let-close="close">
-    <div class="modal-header">
-      <h5 class="modal-title">Event action occurred</h5>
-      <button type="button" class="close" (click)="close()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div>
-        Action:
-        <pre>{{ modalData?.action }}</pre>
-      </div>
-      <div>
-        Event:
-        <pre>{{ modalData?.event | json }}</pre>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary" (click)="close()">
-        OK
-      </button>
-    </div>
-  </ng-template>
+
 
 
 
