@@ -1,9 +1,89 @@
 <app-navbar></app-navbar>
-<div>
+<div class="ms-3 me-3">
   <h1>
     Auftragserfassung
   </h1>
 
-  <br /><br /><br />
+  <br />
 
-
+  <form>
+    <div class="form-group row">
+      <div class="form-group col-md-2">
+        <label for="selectGemeinde">Gemeinde</label>
+        <select class="form-control" id="selectGemeinde">
+          <option value="(A)">Aschach</option>
+          <option value="(H)">Hartkirchen</option>
+          <option value="(P)">Pupping</option>
+          <option value="(S)">Stroheim</option>
+        </select>
+      </div>
+      <div class="form-group col-md-5">
+        <label for="selectKost">Kostenstelle</label>
+        <select class="form-control" id="selectKost">
+          <option value="1">Straßeninstandhaltung</option>
+          <option value="2">Kostenstelle 2</option>
+          <option value="3">Stelle 3</option>
+        </select>
+      </div>
+      <div class="form-group col-md-5">
+        <label for="inputEmail">Email</label>
+        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="form-group col-md-6">
+        <label for="inputPath">Pfad</label>
+        <input type="text" class="form-control" id="inputPath" placeholder="Pfad">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputLink">Link</label>
+        <input type="url" class="form-control" id="inputLink" placeholder="Link">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="form-group col-md-6">
+        <label for="inputTask">Aufgabe</label>
+        <input type="text" class="form-control" id="inputTask" placeholder="Aufgabe">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="selectStaff">Personal</label>
+        <select class="form-control" id="selectStaff">
+          <option value="1">Schnötzinger</option>
+          <option value="2">Moshammer</option>
+          <option value="3">User 3</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="form-group col-md-5">
+        <label for="inputStart">Start</label>
+        <input type="date" class="form-control" id="inputStart">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputDuration">ca. Dauer in AT</label>
+        <input type="number" min="0" class="form-control" id="inputDuration" placeholder="AT">
+      </div>
+      <div class="form-group col-md-5">
+        <label for="inputEnd">Ende</label>
+        <input type="date" class="form-control" id="inputEnd">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="form-group col-md-5">
+        <label for="inputProgress">Fortschritt</label>
+        <input type="number" min="0" class="form-control" id="inputProgress" placeholder="0%">
+      </div>
+      <div class="form-group col-md-7">
+        <label for="selectStatus">Status</label>
+        <select class="form-control" id="selectStatus">
+          <option value="1">In Bearbeitung</option>
+          <option value="2">Eingeteilt</option>
+          <option value="3">Neu</option>
+          <option value="4">Abgeschlossen</option>
+        </select>
+      </div>
+    </div>
+    <br /><br />
+    <button type="submit" class="btn-block btn-color">Auftrag erstellen</button>
+  </form>
+</div>

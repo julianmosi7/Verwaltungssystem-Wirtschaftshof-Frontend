@@ -1,0 +1,9 @@
+.btn-color {
+  border-radius: 50px;
+  color: #476930;
+  background-color: #fff;
+  padding: 8px 40px;
+  cursor: pointer;
+  border: 2px solid #476930
+}
+
