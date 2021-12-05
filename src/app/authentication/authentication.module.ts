@@ -7,8 +7,6 @@ import { AuftragszuweisungComponent } from '../auftragszuweisung/auftragszuweisu
 import {AppModule} from "../app.module";
 import { MatButtonModule } from "@angular/material/button";
 
-
-
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, AuftragszuweisungComponent],
   imports: [

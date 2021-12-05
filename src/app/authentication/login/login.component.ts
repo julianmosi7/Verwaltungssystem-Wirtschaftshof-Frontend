@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgModule } from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -16,6 +17,13 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
+
+    const myusername = (document.getElementById('username') as HTMLInputElement).value;
+    console.log( + ' ' + myusername);
     // routing
+   //this.router.navigate(['/home']);
+
+
+
   }
 }

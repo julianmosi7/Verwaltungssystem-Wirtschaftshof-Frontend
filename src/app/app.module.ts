@@ -14,12 +14,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuftragserfassungModule } from './auftragserfassung/auftragserfassung.module';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent,
     AuftragszuweisungComponent,
+
 
   ],
   imports: [
