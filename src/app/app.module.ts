@@ -12,6 +12,7 @@ import { AuftragserfassungComponent } from './auftragserfassung/auftragserfassun
 import {AuftragszuweisungComponent} from './auftragszuweisung/auftragszuweisung.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuftragserfassungModule } from './auftragserfassung/auftragserfassung.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -29,6 +30,7 @@ import { AuftragserfassungModule } from './auftragserfassung/auftragserfassung.m
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    HttpClientModule,
     CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory}),
     BrowserAnimationsModule,
     AuftragserfassungModule

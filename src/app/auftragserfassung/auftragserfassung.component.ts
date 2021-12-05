@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AuftragserfassungService } from '../core/auftragserfassung.service';
 import { AssignmentDto } from '../models/assignmentDto';
 import { MunicipalDto } from '../models/municipalDto';
 
@@ -33,19 +34,20 @@ export class AuftragserfassungComponent implements OnInit {
     status: new FormControl('')
   });
 
-  municipals: MunicipalDto[] = [
-    {id: 0, name: "Hartkirchen"},
-    {id: 1, name: "Aschach"},
-    {id: 2, name: "Pupping"},
-    {id: 3, name: "Stroheim"}
-  ];
+  municipals: MunicipalDto[];
 
-  constructor() { }
+  constructor(private auftragsservice: AuftragserfassungService) { }
 
   ngOnInit(): void {
     this.assignmentFormGroup.valueChanges.subscribe(x => {
       console.log(x);
     });
+
+    this.auftragsservice.getMunicipals().subscribe(x => {
+      console.log(x);
+      this.municipals = x;
+    })
+
   }
 
   saveAssignment(): void{

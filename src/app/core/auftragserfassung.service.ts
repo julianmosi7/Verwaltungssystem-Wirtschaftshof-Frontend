@@ -8,7 +8,7 @@ import { AssignmentDto } from '../models/assignmentDto';
   providedIn: 'root'
 })
 export class AuftragserfassungService {
-  url = 'localhost:8081/rest'
+  url = 'http://localhost:8081/rest'
 
   constructor(private http: HttpClient) { }
 
