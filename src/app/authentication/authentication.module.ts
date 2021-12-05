@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import {RouterModule} from '@angular/router';
 import { AuftragszuweisungComponent } from '../auftragszuweisung/auftragszuweisung.component';
 import {AppModule} from "../app.module";
+import { MatButtonModule } from "@angular/material/button";
 
 
 
@@ -13,7 +14,8 @@ import {AppModule} from "../app.module";
   imports: [
     CommonModule,
     RouterModule,
-    AppModule
+    AppModule,
+    MatButtonModule
   ]
 })
 export class AuthenticationModule { }

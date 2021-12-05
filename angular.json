@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "60c0ac7e-b28f-49ca-a814-3acee14b1357"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -24,6 +27,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "node_modules/angular-calendar/css/angular-calendar.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
@@ -89,6 +93,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "node_modules/angular-calendar/css/angular-calendar.css",
               "src/styles.css"
             ],

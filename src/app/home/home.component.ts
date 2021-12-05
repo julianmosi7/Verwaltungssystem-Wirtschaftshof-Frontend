@@ -1,4 +1,3 @@
-
 import {
   Component,
   OnInit,
@@ -44,10 +43,9 @@ const colors: any = {
   selector: 'app-home',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
-
-export class HomeComponent  {
+export class HomeComponent {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   view: CalendarView = CalendarView.Month;
 
@@ -140,10 +138,10 @@ export class HomeComponent  {
   }
 
   eventTimesChanged({
-                      event,
-                      newStart,
-                      newEnd,
-                    }: CalendarEventTimesChangedEvent): void {
+    event,
+    newStart,
+    newEnd,
+  }: CalendarEventTimesChangedEvent): void {
     this.events = this.events.map((iEvent) => {
       if (iEvent === event) {
         return {
@@ -194,8 +192,5 @@ export class HomeComponent  {
     this.activeDayIsOpen = false;
   }
 
-
-  logout() {
-
-  }
+  logout() {}
 }

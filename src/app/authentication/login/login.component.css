@@ -28,10 +28,6 @@ textarea {
   padding: 40px 30px 10px 30px
 }
 
-.card2 {
-  width: 50%;
-}
-
 .logo {
   width: 70px;
   height: 55px
@@ -63,7 +59,6 @@ textarea {
 .btn-color {
   border-radius: 50px;
   color: #fff;
-  background-image: linear-gradient(to right, #FFD54F, #476930);
   padding: 15px;
   cursor: pointer;
   border: none ;
@@ -72,7 +67,6 @@ textarea {
 
 .btn-color:hover {
   color: #fff;
-  background-image: linear-gradient(to right, #476930, #FFD54F)
 }
 
 .btn-white {
@@ -86,7 +80,6 @@ textarea {
 
 .btn-white:hover {
   color: #fff;
-  background-image: linear-gradient(to right, #FFD54F, #476930)
 }
 
 a {

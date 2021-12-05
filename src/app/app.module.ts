@@ -10,6 +10,8 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AuftragserfassungComponent } from './auftragserfassung/auftragserfassung.component';
 import {AuftragszuweisungComponent} from './auftragszuweisung/auftragszuweisung.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuftragserfassungModule } from './auftragserfassung/auftragserfassung.module';
 
 
 @NgModule({
@@ -17,7 +19,6 @@ import {AuftragszuweisungComponent} from './auftragszuweisung/auftragszuweisung.
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    AuftragserfassungComponent,
     AuftragszuweisungComponent,
 
   ],
@@ -25,7 +26,9 @@ import {AuftragszuweisungComponent} from './auftragszuweisung/auftragszuweisung.
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory})
+    CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory}),
+    BrowserAnimationsModule,
+    AuftragserfassungModule
   ],
   providers: [],
   exports: [
