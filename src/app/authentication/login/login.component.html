@@ -12,6 +12,9 @@
             </div>
             <h3 class="mb-5 text-center heading">Wirtschaftshof Verwaltung</h3>
             <h6 class="msg-info">Melden Sie sich bei Ihrem Konto an</h6>
+            <form [formGroup]="userData">
+
+            
             <div class="form-group">
               <label class="control-label text-muted">Benutzername</label>
               <div class="input-group">
@@ -39,6 +42,7 @@
                   name="email"
                   placeholder="Email"
                   class="form-control"
+                  formControlName="username"
                 />
               </div>
             </div>
@@ -67,15 +71,16 @@
                   name="psw"
                   placeholder="Passwort"
                   class="form-control"
+                  formControlName="password"
                 />
               </div>
             </div>
+          </form>
             <div class="row justify-content-center my-3 px-3">
               <button (click)="login()" class="btn-block btn-color">
                 Anmelden
               </button>
 
-              <button mat-button color="primary">Anmelden</button>
 
             </div>
             <div class="row justify-content-center my-2">

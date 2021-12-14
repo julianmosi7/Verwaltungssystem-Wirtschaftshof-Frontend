@@ -6,14 +6,19 @@ import {RouterModule} from '@angular/router';
 import { AuftragszuweisungComponent } from '../auftragszuweisung/auftragszuweisung.component';
 import {AppModule} from "../app.module";
 import { MatButtonModule } from "@angular/material/button";
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, AuftragszuweisungComponent],
+  declarations: [LoginComponent, RegisterComponent],
   imports: [
     CommonModule,
-    RouterModule,
-    AppModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthenticationModule { }

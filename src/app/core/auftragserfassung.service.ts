@@ -8,7 +8,7 @@ import { AssignmentDto } from '../models/assignmentDto';
   providedIn: 'root'
 })
 export class AuftragserfassungService {
-  url = 'http://localhost:8081/rest'
+  url = 'http://localhost:8081/rest';
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class AuftragserfassungService {
   }
 
   saveAssignment(assignment: AssignmentDto): Observable<AssignmentDto>{
-    return this.http.post<AssignmentDto>(`${this.url}/saveAssignment`, assignment);
+    return this.http.post<AssignmentDto>(`${this.url}/auftrag/newAuftrag`, assignment);
   }
 
 }

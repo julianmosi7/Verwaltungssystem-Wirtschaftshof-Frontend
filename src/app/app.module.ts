@@ -13,6 +13,9 @@ import {AuftragszuweisungComponent} from './auftragszuweisung/auftragszuweisung.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuftragserfassungModule } from './auftragserfassung/auftragserfassung.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthenticationModule } from './authentication/authentication.module';
+import { CoreModule } from './core/core.module';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -23,8 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     NavbarComponent,
     AuftragszuweisungComponent,
-
-
+    
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,10 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory}),
     BrowserAnimationsModule,
-    AuftragserfassungModule
+    AuftragserfassungModule,
+    AuthenticationModule,
+    CoreModule,
+    MatButtonModule
   ],
   providers: [],
   exports: [
