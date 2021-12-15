@@ -4,6 +4,14 @@
   width: 100vw;
 }
 
+h3, label{
+  color:white;
+}
+
+.textu{
+  color: white;
+}
+
 input,
 textarea {
   background-color: #FFFFFF;
@@ -14,13 +22,15 @@ textarea {
   border: none ;
   border: 1px solid #F3E5F5 ;
   font-size: 16px;
-  color: #000 ;
+  color: white ;
   font-weight: 400
 }
 
 .card {
   border-radius: 0;
-  border: none
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, #333333,#444444, #555555);
 }
 
 .card1 {
@@ -43,61 +53,36 @@ textarea {
 }
 
 :-ms-input-placeholder {
-  color: #000 !important
+  color: #FFFFFF
 }
 
-.form-control-label {
-  font-size: 12px;
-  margin-left: 15px
-}
+
 
 .msg-info {
   padding-left: 15px;
-  margin-bottom: 30px
+  margin-bottom: 30px;
+  color:white;
 }
 
 .btn-color {
   border-radius: 50px;
-  color: #fff;
+  color: black;
+  background-color: lightgrey;
   padding: 15px;
   cursor: pointer;
   border: none ;
-  margin-top: 40px
+  margin-top: 40px;
 }
 
 .btn-color:hover {
-  color: #fff;
-}
-
-.btn-white {
-  border-radius: 50px;
-  color: #476930;
-  background-color: #fff;
-  padding: 8px 40px;
-  cursor: pointer;
-  border: 2px solid #476930 !important
-}
-
-.btn-white:hover {
-  color: #fff;
+  background-color: white;
 }
 
 a {
   color: #000
 }
 
-.input-group-prepend span{
-  background-color: #FFFFFF;
 
-  padding: 12px 15px 12px 15px;
-  width: 100%;
-  box-sizing: border-box;
-  border: none ;
-  border: 1px solid #F3E5F5 ;
-  font-size: 16px;
-  color: #000 ;
-  font-weight: 400
-}
 
 span{
   border-radius: 50px 0px 0px 50px;

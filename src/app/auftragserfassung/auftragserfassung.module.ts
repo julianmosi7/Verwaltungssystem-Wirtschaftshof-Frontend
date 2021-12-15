@@ -7,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {AppModule} from '../app.module';
 
 
 @NgModule({
@@ -18,7 +19,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
   ]
 })
 export class AuftragserfassungModule { }

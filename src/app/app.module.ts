@@ -26,7 +26,6 @@ import { MatButtonModule } from '@angular/material/button';
     HomeComponent,
     NavbarComponent,
     AuftragszuweisungComponent,
-    
   ],
   imports: [
     BrowserModule,

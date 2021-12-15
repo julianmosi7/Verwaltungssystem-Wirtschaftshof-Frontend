@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UserDto} from '../models/userDto';
 
 @Component({
   selector: 'app-navbar',
@@ -7,12 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+
   constructor() { }
+
+  // tslint:disable-next-line:typedef
+  static user: UserDto;
+
 
   ngOnInit(): void {
   }
 
-  // tslint:disable-next-line:typedef
   logout() {
 
   }
