@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { CoreModule } from './core/core.module';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -38,7 +39,8 @@ import { MatButtonModule } from '@angular/material/button';
     AuftragserfassungModule,
     AuthenticationModule,
     CoreModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   exports: [

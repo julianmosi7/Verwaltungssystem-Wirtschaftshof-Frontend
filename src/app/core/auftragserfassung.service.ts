@@ -20,5 +20,9 @@ export class AuftragserfassungService {
     return this.http.post<AssignmentDto>(`${this.url}/auftrag/newAuftrag`, assignment);
   }
 
+  updateAssignment(assignment: AssignmentDto): Observable<AssignmentDto>{
+    return this.http.put<AssignmentDto>(`${this.url}/auftrag/editEntry`, assignment)
+  }
+
 }
  

@@ -1,9 +1,12 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {Router} from '@angular/router';
 import { AuthenticationService } from 'src/app/core/authentication.service';
 import { AuthenticationDto } from 'src/app/models/authenticationDto';
+import { TokenDto } from 'src/app/models/tokenDto';
+import { Url } from 'url';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +19,9 @@ export class LoginComponent implements OnInit {
     password: new FormControl('')
   });
 
+  returnUrl: Url;
+  tokenDto: TokenDto;
+
   public getUsername(): string{
     return this.userData.get("username").value;
   }
@@ -27,11 +33,14 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   token = '';
 
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(private authenticationService: AuthenticationService, private router: Router) {
 
   }
 
   ngOnInit(): void {
+    console.log(`LoginComponent::ngOnInit`);
+    //this.authenticationService.logout();
+    //this.returnUrl = this.route.snapshot?.queryParams?.returnUrl || '/';
   }
 
   login(): void {
@@ -42,7 +51,10 @@ export class LoginComponent implements OnInit {
     this.errorMessage = '';
     this.token = '';
     this.authenticationService.login(authenticationDto).subscribe(
-      x => console.log(x),
+      x => {
+        this.tokenDto = x;
+        this.router.navigate(['/auftragserfassung']);
+      },
       error => this.errorMessage = `${error.statusText}/${error.status}`);
     };
     

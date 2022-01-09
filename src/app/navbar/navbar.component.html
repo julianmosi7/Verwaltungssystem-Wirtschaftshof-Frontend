@@ -1,31 +1,43 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="row justify-content-center px-3 mb-3">
+  <div class="row justify-content-center px-3">
     <img class="logo" src="../../../assets/waschach.jpeg">
     <img class="logo" src="../../../assets/whartkirchen.gif">
     <img class="logo" src="../../../assets/wpupping.png">
     <img class="logo" src="../../../assets/wstroheim.png">
   </div>
-
+  
   <a class="navbar-brand" href="/home">Verwaltungssoftware Wirtschaftshof</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
-  </button>
+  </button> -->
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li>
+      <li class="nav-item">
         <a class="nav-link" routerLink="/home">Startseite<span class="sr-only"></span></a>
       </li>
-      <li>
+      <li class="nav-item">
         <a class="nav-link" routerLink="/auftragserfassung">Auftragserfassung<span class="sr-only"></span></a>
       </li>
-      <li>
+      <li class="nav-item">
         <a class="nav-link" routerLink="/auftragszuweisung">Auftragszuweisung<span class="sr-only"></span></a>
       </li>
     </ul>
+
+    <div class="right-container">
+      <div class="flex-container">
+        <mat-icon aria-hidden="false" aria-label="user">person</mat-icon>
+        <a style="text-decoration: none; color: black;"><i>{{currentUser}}</i></a> 
+      </div>
+
+      <button mat-raised-button color="basic" routerLink="/login" *ngIf="!loggedIn">Login</button>
+      <button mat-raised-button color="warn" routerLink="/login" (click)="logout()" *ngIf="loggedIn">Logout</button>
+    </div>
   </div>
-  <!--<a class="nav-link" (click)="showUser()" )>User</a>-->
-  <a>User <i>julianmosi7</i> logged in</a>
-  <button mat-raised-button color="basic" routerLink="/login">Login</button>
-  <button routerLink="/login" style="margin-right: 30px" class="btn btn-danger" (click)="logout()">Logout</button>
+  
+   
+    
+    
+  
+
 </nav>

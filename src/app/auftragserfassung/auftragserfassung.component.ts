@@ -1,3 +1,4 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuftragserfassungService } from '../core/auftragserfassung.service';
@@ -10,7 +11,7 @@ import { UserDto } from '../models/userDto';
 const ASSIGNMENT_DATA: AssignmentDto[] = [
   {assignmentId: 1, municipal: {id: 1, name: "Hartkirchen"}, costCenter: {costCenterNumber: "X1", costCenterName: "Kostenstelle"}, 
   email: "ss", assignmentLink: "aa", assignment: "aa", staffSuggestion: "Herbert", 
-  start: null, duration: 2, end: null, progress: "a", status: "s"}
+  start: null, duration: 2, end: null, progress: "a", status: "s", approved: true}
 ]
 
 @Component({
@@ -25,7 +26,6 @@ export class AuftragserfassungComponent implements OnInit {
   dataSource = ASSIGNMENT_DATA;
 
   assignmentFormGroup = new FormGroup({
-    assignmentId: new FormControl(''),
     municipal: new FormControl(''),
     costCenter: new FormControl(''),
     email: new FormControl(''),
@@ -38,6 +38,7 @@ export class AuftragserfassungComponent implements OnInit {
     end: new FormControl(''),
     progress: new FormControl(''),
     status: new FormControl(''),
+    approved: new FormControl('')
   });
 
   municipals: MunicipalDto[] = [];
@@ -68,9 +69,9 @@ export class AuftragserfassungComponent implements OnInit {
   }
 
   saveAssignment(): void{
-    console.log("save assignment");
+    console.log("save assignment...");
     this.assignment = {
-      assignmentId: this.assignmentFormGroup.get("assignmentId").value,
+      assignmentId: null,
       costCenter: this.assignmentFormGroup.get("costCenter").value,
       municipal: this.assignmentFormGroup.get("municipal").value,
       email: this.assignmentFormGroup.get("email").value,
@@ -82,11 +83,22 @@ export class AuftragserfassungComponent implements OnInit {
       duration: this.assignmentFormGroup.get("duration").value,
       end: this.assignmentFormGroup.get("end").value,
       progress: this.assignmentFormGroup.get("progress").value,
-      status: this.assignmentFormGroup.get("status").value
+      status: this.assignmentFormGroup.get("status").value,
+      approved: false
     };
 
     this.auftragsservice.saveAssignment(this.assignment).subscribe(x => {
       console.log(x);
+      //TODO: create new row to table, after assignment was sent
     });
+  }
+
+  updateAssignment(assignment: AssignmentDto, approved: boolean): void{
+    console.log("update assignment...");
+    assignment.approved = approved;
+    this.auftragsservice.updateAssignment(this.assignment).subscribe(x => {
+      console.log(x);
+      //TODO: delete from row, if accepted or deleted
+    })
   }
 }

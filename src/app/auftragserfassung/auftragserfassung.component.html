@@ -1,179 +1,191 @@
 <h1>Auftragserfassung</h1>
-<div class="container">
-  <form [formGroup]="assignmentFormGroup">
-    <div class="top-row">
-      <div class="row">
-        <div class="col">
-          <mat-form-field>
-            <mat-label>Auftragsnummer</mat-label>
-            <input type="number" matInput formControlName="assignmentId" />
-          </mat-form-field>
-        </div>
-
-        <div class="col">
-          <mat-form-field>
-            <mat-label>Gemeinde</mat-label>
-            <mat-select formControlName="municipal">
-              <mat-option
-                *ngFor="let municipal of municipals"
-                [value]="municipal.gemeinde_id"
-              >
-                {{ municipal.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col">
-          <mat-form-field>
-            <mat-label>Kostenstelle</mat-label>
-            <mat-select formControlName="costCenter">
-              <mat-option *ngFor="let costCenter of costCenters"
-              [value]="costCenter.costCenterNumber"
-              >
-              {{ costCenter.costCenterName }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </div>
-    </div>
-
+  <div class="container-fluid">
     <div class="row">
-      <div class="col">
-        <mat-form-field>
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email" />
-        </mat-form-field>
-      </div>
-
-      <div class="col">
-        <mat-form-field>
-          <!-- use enum, zb.: Krank, Urlaub, Arzt -->
-          <mat-label>Auftrag Link</mat-label>
-          <input type="text" matInput formControlName="assignmentLink" />
-        </mat-form-field>
-      </div>
+      <form [formGroup]="assignmentFormGroup">
+        <div class="row justify-content-center">
+          
+  
+          <div class="col-sm-2">
+            <mat-form-field>
+              <mat-label>Gemeinde</mat-label>
+              <mat-select formControlName="municipal">
+                <mat-option
+                  *ngFor="let municipal of municipals"
+                  [value]="municipal.gemeinde_id"
+                >
+                  {{ municipal.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+  
+          <div class="col-sm-2">
+            <mat-form-field>
+              <mat-label>Kostenstelle</mat-label>
+              <mat-select formControlName="costCenter">
+                <mat-option
+                  *ngFor="let costCenter of costCenters"
+                  [value]="costCenter.costCenterNumber"
+                >
+                  {{ costCenter.costCenterName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+  
+        <div class="row justify-content-center">
+          <div class="col-sm-4">
+            <mat-divider></mat-divider>
+          </div>
+        </div>
+  
+        <div class="row justify-content-center">
+          <div class="col-sm-2">
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" />
+            </mat-form-field>
+          </div>
+  
+          <div class="col-sm-2">
+            <mat-form-field>
+              <!-- use enum, zb.: Krank, Urlaub, Arzt -->
+              <mat-label>Auftrag Link</mat-label>
+              <input type="text" matInput formControlName="assignmentLink" />
+            </mat-form-field>
+          </div>
+        </div>
+  
+        <div class="row justify-content-center">
+          <div class="col-sm-2">
+            <mat-form-field>
+              <mat-label>Aufgabe</mat-label>
+              <input type="text" matInput formControlName="assignment" />
+            </mat-form-field>
+          </div>
+  
+          <div class="col-sm-2">
+            <mat-form-field>
+              <mat-label>Personal Vorschlag</mat-label>
+              <mat-select formControlName="staffSuggestion">
+                <mat-option *ngFor="let user of staff" [value]="user.userId">
+                  {{ user.firstname }} {{ user.lastname }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+  
+        <div class="row justify-content-center">
+          <div class="col-sm-2">
+            <mat-form-field>
+              <mat-label>Fortschritt</mat-label>
+              <input type="text" matInput formControlName="progress" />
+            </mat-form-field>
+          </div>
+  
+          <div class="col-sm-2">
+            <mat-form-field>
+              <!-- use enum -->
+              <mat-label>Status</mat-label>
+              <input type="text" matInput formControlName="status" />
+            </mat-form-field>
+          </div>
+        </div>
+  
+        <div class="row justify-content-center">
+          <div class="col-sm-4">
+            <button mat-raised-button color="basic" (click)="saveAssignment()">Send</button>
+          </div>
+        </div>
+      </form>
     </div>
-
-    <div class="row">
-      <div class="col">
-        <mat-form-field>
-          <mat-label>Aufgabe</mat-label>
-          <input type="text" matInput formControlName="assignment" />
-        </mat-form-field>
-      </div>
-
-      <div class="col">
-        <mat-form-field>
-          <mat-label>Personal Vorschlag</mat-label>
-          <mat-select formControlName="staffSuggestion">
-            <mat-option *ngFor="let user of staff"
-            [value]="user.userId"
-            >
-            {{ user.firstname }} {{ user.lastname }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <mat-form-field>
-          <mat-label>Fortschritt</mat-label>
-          <input type="text" matInput formControlName="progress" />
-        </mat-form-field>
-      </div>
-
-      <div class="col">
-        <mat-form-field>
-          <!-- use enum -->
-          <mat-label>Status</mat-label>
-          <input type="text" matInput formControlName="status" />
-        </mat-form-field>
-      </div>
-    </div>
-  </form>
-
-  <button mat-raised-button color="basic" (click)="saveAssignment()">
-    Submit
-  </button>
-</div>
-
-<table mat-table [dataSource]="dataSource">
-    <ng-container matColumnDef="assignmentId">
-      <th mat-header-cell *matHeaderCellDef>Auftragsnummer</th>
-      <td mat-cell *matCellDef="let assignment">{{ assignment.assignmentId }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="costCenter">
-        <th mat-header-cell *matHeaderCellDef>Municipal</th>
-        <td mat-cell *matCellDef="let assignment"> {{ assignment.municipal.name }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="municipal">
-        <th mat-header-cell *matHeaderCellDef>Kostenstelle</th>
-        <td mat-cell *matCellDef="let assignment"> {{assignment.costCenter}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef>Email</th>
-        <td mat-cell *matCellDef="let assignment"> {{assignment.email}} </td>
-    </ng-container>
+  </div>
+  
+  <div class="container-footer">
+    <table mat-table [dataSource]="dataSource" class="content">
+      <ng-container matColumnDef="assignmentId">
+        <th mat-header-cell *matHeaderCellDef>Auftragsnummer</th>
+        <td mat-cell *matCellDef="let assignment">{{ assignment.assignmentId }}</td>
+      </ng-container>
     
-    <ng-container matColumnDef="assignmentLink">
+      <ng-container matColumnDef="costCenter">
+        <th mat-header-cell *matHeaderCellDef>Municipal</th>
+        <td mat-cell *matCellDef="let assignment">
+          {{ assignment.municipal.name }}
+        </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="municipal">
+        <th mat-header-cell *matHeaderCellDef>Kostenstelle</th>
+        <td mat-cell *matCellDef="let assignment">{{ assignment.costCenter.costCenterNumber }}</td>
+      </ng-container>
+    
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let assignment">{{ assignment.email }}</td>
+      </ng-container>
+    
+      <ng-container matColumnDef="assignmentLink">
         <th mat-header-cell *matHeaderCellDef>Auftrag Link</th>
-        <td mat-cell *matCellDef="let assignment"> {{assignment.assignmentLink}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="assignment">
+        <td mat-cell *matCellDef="let assignment">
+          {{ assignment.assignmentLink }}
+        </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="assignment">
         <th mat-header-cell *matHeaderCellDef>Auftrag</th>
-        <td mat-cell *matCellDef="let assignment"> {{assignment.assignment}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="staffSuggestion">
+        <td mat-cell *matCellDef="let assignment">{{ assignment.assignment }}</td>
+      </ng-container>
+    
+      <ng-container matColumnDef="staffSuggestion">
         <th mat-header-cell *matHeaderCellDef>Personal Vorschlag</th>
-        <td mat-cell *matCellDef="let assignment"> {{assignment.staffSuggestion}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="start">
+        <td mat-cell *matCellDef="let assignment">
+          {{ assignment.staffSuggestion }}
+        </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="start">
         <th mat-header-cell *matHeaderCellDef>Start</th>
-        <td mat-cell *matCellDef="let assignment"> {{assignment.start}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="duration">
+        <td mat-cell *matCellDef="let assignment">{{ assignment.start }}</td>
+      </ng-container>
+    
+      <ng-container matColumnDef="duration">
         <th mat-header-cell *matHeaderCellDef>Dauer</th>
-        <td mat-cell *matCellDef="let assignment"> {{assignment.duration}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="end">
+        <td mat-cell *matCellDef="let assignment">{{ assignment.duration }}</td>
+      </ng-container>
+    
+      <ng-container matColumnDef="end">
         <th mat-header-cell *matHeaderCellDef>Ende</th>
-        <td mat-cell *matCellDef="let assignment"> {{assignment.end}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="progress">
+        <td mat-cell *matCellDef="let assignment">{{ assignment.end }}</td>
+      </ng-container>
+    
+      <ng-container matColumnDef="progress">
         <th mat-header-cell *matHeaderCellDef>Fortschritt</th>
-        <td mat-cell *matCellDef="let assignment"> {{assignment.progress}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="status">
+        <td mat-cell *matCellDef="let assignment">{{ assignment.progress }}</td>
+      </ng-container>
+    
+      <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef>Status</th>
-        <td mat-cell *matCellDef="let assignment"> {{assignment.status}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="btnAccept">
+        <td mat-cell *matCellDef="let assignment">{{ assignment.status }}</td>
+      </ng-container>
+    
+      <ng-container matColumnDef="btnAccept">
         <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let assignment"> <button mat-raised-button color="primary">Accept</button> </td>
-    </ng-container>
-
-    <ng-container matColumnDef="btnDelete">
+        <td mat-cell *matCellDef="let assignment">
+          <button mat-raised-button color="basic" (click)="updateAssignment(assignment, true)">Accept</button>
+        </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="btnDelete">
         <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let assignment"> <button mat-raised-button color="warn">Del</button> </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+        <td mat-cell *matCellDef="let assignment">
+          <button mat-raised-button color="warn" (click)="updateAssignment(assignment, false)">Delete</button>
+        </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>  

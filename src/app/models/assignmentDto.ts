@@ -15,4 +15,5 @@ export class AssignmentDto{
     end: Date;
     progress: String;
     status: String;
+    approved: boolean;
 }
