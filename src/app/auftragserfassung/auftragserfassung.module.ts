@@ -8,6 +8,7 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {AppModule} from '../app.module';
 
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../core/authentication.service';
+import { UserDto } from '../models/userDto';
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +13,10 @@ export class NavbarComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService) { }
 
+  // tslint:disable-next-line:typedef
+  static user: UserDto;
+
+
   ngOnInit(): void {
     this.currentUser = 'selimosi';
     this.authenticationService.listenLogged().subscribe(x => {
@@ -21,7 +26,6 @@ export class NavbarComponent implements OnInit {
    
   }
 
-  // tslint:disable-next-line:typedef
   logout() {
     this.authenticationService.logout();
     location.reload();

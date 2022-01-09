@@ -2,7 +2,7 @@ import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/authentication.service';
 import { AuthenticationDto } from 'src/app/models/authenticationDto';
 import { TokenDto } from 'src/app/models/tokenDto';
@@ -14,6 +14,7 @@ import { Url } from 'url';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   userData = new FormGroup({
     username: new FormControl(''),
     password: new FormControl('')
@@ -33,9 +34,8 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   token = '';
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) {
+  constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
-  }
 
   ngOnInit(): void {
     console.log(`LoginComponent::ngOnInit`);
@@ -43,11 +43,13 @@ export class LoginComponent implements OnInit {
     //this.returnUrl = this.route.snapshot?.queryParams?.returnUrl || '/';
   }
 
+
+
   login(): void {
-    let authenticationDto: AuthenticationDto = {
+    const authenticationDto: AuthenticationDto = {
       username: this.getUsername(),
       password: this.getPassword()
-    }
+    };
     this.errorMessage = '';
     this.token = '';
     this.authenticationService.login(authenticationDto).subscribe(

@@ -29,6 +29,7 @@ export class AuthenticationService {
   }
 
   public logout(): void{
+    console.log('AuthenticationService::logout');
     sessionStorage.removeItem('currentUser');
     this.notifyLogged();
   }

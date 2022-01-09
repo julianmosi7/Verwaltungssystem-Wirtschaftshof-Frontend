@@ -27,7 +27,6 @@ import { MatIconModule } from '@angular/material/icon';
     HomeComponent,
     NavbarComponent,
     AuftragszuweisungComponent,
-    
   ],
   imports: [
     BrowserModule,
