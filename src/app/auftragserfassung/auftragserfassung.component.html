@@ -12,7 +12,7 @@
               <mat-select formControlName="municipal">
                 <mat-option
                   *ngFor="let municipal of municipals"
-                  [value]="municipal.gemeinde_id"
+                  [value]="municipal"
                 >
                   {{ municipal.name }}
                 </mat-option>
@@ -36,7 +36,7 @@
               <mat-select formControlName="costCenter">
                 <mat-option
                   *ngFor="let costCenter of costCenters"
-                  [value]="costCenter.id"
+                  [value]="costCenter"
                 >
                   {{ costCenter.description }}
                 </mat-option>
@@ -109,8 +109,9 @@
           <div class="col-sm-2">
             <mat-form-field>
               <mat-label>Personal Vorschlag</mat-label>
-              <mat-select formControlName="staffSuggestion">
-                <mat-option *ngFor="let user of staff" [value]="user.userId">
+
+              <mat-select formControlName="staffSuggestion" multiple>
+                <mat-option *ngFor="let user of staff" [value]="user">
                   {{ user.firstname }} {{ user.lastname }}
                 </mat-option>
               </mat-select>
@@ -132,7 +133,7 @@
               <mat-label>Status</mat-label>
               <mat-select formControlName="status">
                 <mat-option *ngFor="let status of status" [value]="status">
-                  {{ status }}
+                  {{ status.name }}
                 </mat-option>
               </mat-select>
             </mat-form-field>

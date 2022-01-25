@@ -4,14 +4,15 @@ import { LicenceDto } from "./licenceDto";
 import { RoleDto } from "./roleDto";
 
 export class UserDto{
-    userId: number;
+    id: number;
+    username: String;
+    password: String;
     firstname: string;
     lastname: string;
     email: string;
-    password: string;
     birthdate: Date;
     role: RoleDto;
-    licence: LicenceDto;
-    holidays: HolidayDto;
-    assignments: AssignmentDto;
+    licence: LicenceDto[];
+    holidays: HolidayDto[];
+    assignments: AssignmentDto[];
 }

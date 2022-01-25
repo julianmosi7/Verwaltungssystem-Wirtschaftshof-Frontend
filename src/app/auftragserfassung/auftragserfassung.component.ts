@@ -6,12 +6,13 @@ import { AssignmentDto } from '../models/assignmentDto';
 import { CostCenter } from '../models/costCenter';
 import { MunicipalDto } from '../models/municipalDto';
 import { RoleDto } from '../models/roleDto';
+import { Status } from '../models/statusDto';
 import { UserDto } from '../models/userDto';
 
 const ASSIGNMENT_DATA: AssignmentDto[] = [
-  {assignmentId: 1, municipal: {id: 1, name: "Hartkirchen"}, costCenter: {id: 0, description: "X1", category: "32"}, 
-  email: "ss", assignmentLink: "aa", assignmentDescription: "aa", staffSuggestion: "Herbert", 
-  start: null, duration: 2, end: null, progress: "a", status: "s", approved: true}
+  {assignmentId: 1, municipal: {id: 1, name: "Hartkirchen"}, costCenter: {id: 0, costId: 'Cx 3', description: "X1", category: "32"}, 
+  email: "ss", assignmentLink: "aa", assignmentDescription: "aa", staffSuggestion: null, 
+  start: null, duration: 2, end: null, progress: null, status: null, approved: true}
 ]
 
 @Component({
@@ -50,19 +51,23 @@ export class AuftragserfassungComponent implements OnInit {
   */
 
   costCenters: CostCenter[] = [
-    {id: 0, description: 'Cost Center 1', category: "1"},
-    {id: 1, description: 'Cost Center 2', category: "2"}
+    {id: 0, costId: 'Cx 1', description: 'Cost Center 1', category: "1"},
+    {id: 1, costId: 'Cy 2', description: 'Cost Center 2', category: "2"}
   ];
 
-  status: String[] = [
-    "Open", "Closed"
+  status: Status[] = [
+    {id: 0, name: 'Open'},
+    {id: 1, name: 'Closed'}
   ]
 
   assignment: AssignmentDto;
 
   staff: UserDto[] = [
-    {userId: 0, firstname: "Selina", lastname: "Moshammer", email: "moshammersel",
-  password: "1234", birthdate: null, role: null, licence: null, holidays: null, assignments: null}
+    {id: 0, username: "selimosi", password: "test", firstname: "Selina", lastname: "Moshammer", email: "moshammersel",
+     birthdate: null, role: null, licence: null, holidays: null, assignments: null},
+
+     {id: 1, username: "julianmosi", password: "test", firstname: "Julian", lastname: "Moshammer", email: "moshammerju",
+     birthdate: null, role: null, licence: null, holidays: null, assignments: null}
   ]
 
   constructor(private auftragsservice: AuftragserfassungService) { }
@@ -102,7 +107,6 @@ export class AuftragserfassungComponent implements OnInit {
       this.validityButton = false;
     }
     
-
     console.log("save assignment...");
     this.assignment = {
       assignmentId: null,
@@ -120,6 +124,8 @@ export class AuftragserfassungComponent implements OnInit {
       status: this.assignmentFormGroup.get("status").value,
       approved: false
     };
+
+    console.log(this.assignment);
 
     this.auftragsservice.saveAssignment(this.assignment).subscribe(x => {
       console.log(x);

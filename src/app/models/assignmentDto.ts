@@ -1,5 +1,6 @@
 import { CostCenter } from "./costCenter";
 import { MunicipalDto } from "./municipalDto";
+import { Status } from "./statusDto";
 import { UserDto } from "./userDto";
 
 export class AssignmentDto{
@@ -9,11 +10,11 @@ export class AssignmentDto{
     email: String;
     assignmentLink: String;
     assignmentDescription: String;
-    staffSuggestion: string;
+    staffSuggestion: UserDto[];
     start: Date;
     duration: number;
     end: Date;
-    progress: String;
-    status: String;
+    progress: number;
+    status: Status;
     approved: boolean;
 }
