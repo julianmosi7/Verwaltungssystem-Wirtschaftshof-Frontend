@@ -98,7 +98,10 @@ export class AuftragserfassungComponent implements OnInit {
   }
 
   saveAssignment(): void{
-    this.validityButton = false;
+    if(!this.email.valid && (this.email?.dirty || this.email?.touched)){
+      this.validityButton = false;
+    }
+    
 
     console.log("save assignment...");
     this.assignment = {
