@@ -18,6 +18,16 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
+            <a [style.color]="!municipal?.valid && (municipal?.dirty || municipal?.touched) ? 'red' : 'black'">
+              *
+            </a>
+            
+            
+            <div *ngIf="(!municipal?.valid && (municipal?.dirty || municipal?.touched)) || validityButton == false">
+              <div class="validationError" [hidden]="!municipal.errors.required">
+                <a>Municipal is required!</a>
+              </div>
+            </div>
           </div>
   
           <div class="col-sm-2">
@@ -26,17 +36,27 @@
               <mat-select formControlName="costCenter">
                 <mat-option
                   *ngFor="let costCenter of costCenters"
-                  [value]="costCenter.costCenterNumber"
+                  [value]="costCenter.id"
                 >
-                  {{ costCenter.costCenterName }}
+                  {{ costCenter.description }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
+            <a [style.color]="!costCenter?.valid && (costCenter?.dirty || costCenter?.touched) ? 'red' : 'black'">
+              *
+            </a>
+            
+            
+            <div *ngIf="(!costCenter?.valid && (costCenter?.dirty || costCenter?.touched)) || validityButton == false">
+              <div class="validationError" [hidden]="!costCenter.errors.required">
+                <a>CostCenter is required!</a>
+              </div>
+            </div>
           </div>
         </div>
   
         <div class="row justify-content-center">
-          <div class="col-sm-4">
+          <div class="col-sm-4 mb-3">
             <mat-divider></mat-divider>
           </div>
         </div>
@@ -47,6 +67,16 @@
               <mat-label>Email</mat-label>
               <input matInput formControlName="email" />
             </mat-form-field>
+            <a [style.color]="!email?.valid && (email?.dirty || email?.touched) ? 'red' : 'black'">
+              *
+            </a>
+            
+            
+            <div *ngIf="(!email?.valid && (email?.dirty || email?.touched)) || validityButton == false">
+              <div class="validationError" [hidden]="!email.errors.required">
+                <a>Email is required!</a>
+              </div>
+            </div>
           </div>
   
           <div class="col-sm-2">
@@ -61,9 +91,19 @@
         <div class="row justify-content-center">
           <div class="col-sm-2">
             <mat-form-field>
-              <mat-label>Aufgabe</mat-label>
-              <input type="text" matInput formControlName="assignment" />
+              <mat-label>Aufgabenbeschreibung</mat-label>
+              <input type="text" matInput formControlName="assignmentDescription" />
             </mat-form-field>
+            <a [style.color]="!assignmentDescription?.valid && (assignmentDescription?.dirty || assignmentDescription?.touched) ? 'red' : 'black'">
+              *
+            </a>
+            
+            
+            <div *ngIf="(!assignmentDescription?.valid && (assignmentDescription?.dirty || assignmentDescription?.touched)) || validityButton == false">
+              <div class="validationError" [hidden]="!assignmentDescription.errors.required">
+                <a>Assignment Description is required!</a>
+              </div>
+            </div>
           </div>
   
           <div class="col-sm-2">
@@ -81,8 +121,8 @@
         <div class="row justify-content-center">
           <div class="col-sm-2">
             <mat-form-field>
-              <mat-label>Fortschritt</mat-label>
-              <input type="text" matInput formControlName="progress" />
+              <mat-label>Fortschritt (in %)</mat-label>
+              <input type="number" matInput formControlName="progress" />
             </mat-form-field>
           </div>
   
@@ -90,7 +130,11 @@
             <mat-form-field>
               <!-- use enum -->
               <mat-label>Status</mat-label>
-              <input type="text" matInput formControlName="status" />
+              <mat-select formControlName="status">
+                <mat-option *ngFor="let status of status" [value]="status">
+                  {{ status }}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
         </div>
@@ -111,16 +155,16 @@
         <td mat-cell *matCellDef="let assignment">{{ assignment.assignmentId }}</td>
       </ng-container>
     
-      <ng-container matColumnDef="costCenter">
+      <ng-container matColumnDef="municipal">
         <th mat-header-cell *matHeaderCellDef>Municipal</th>
         <td mat-cell *matCellDef="let assignment">
           {{ assignment.municipal.name }}
         </td>
       </ng-container>
     
-      <ng-container matColumnDef="municipal">
+      <ng-container matColumnDef="costCenter">
         <th mat-header-cell *matHeaderCellDef>Kostenstelle</th>
-        <td mat-cell *matCellDef="let assignment">{{ assignment.costCenter.costCenterNumber }}</td>
+        <td mat-cell *matCellDef="let assignment">{{ assignment.costCenter.description }}</td>
       </ng-container>
     
       <ng-container matColumnDef="email">
@@ -135,7 +179,7 @@
         </td>
       </ng-container>
     
-      <ng-container matColumnDef="assignment">
+      <ng-container matColumnDef="assignmentDescription">
         <th mat-header-cell *matHeaderCellDef>Auftrag</th>
         <td mat-cell *matCellDef="let assignment">{{ assignment.assignment }}</td>
       </ng-container>

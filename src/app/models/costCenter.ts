@@ -1,4 +1,5 @@
 export class CostCenter{
-    costCenterNumber: string;
-    costCenterName: string;
+    id: number;
+    description: string;
+    category: string;
 }

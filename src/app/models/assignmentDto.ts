@@ -8,7 +8,7 @@ export class AssignmentDto{
     municipal: MunicipalDto;
     email: String;
     assignmentLink: String;
-    assignment: String;
+    assignmentDescription: String;
     staffSuggestion: string;
     start: Date;
     duration: number;

@@ -1,6 +1,6 @@
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuftragserfassungService } from '../core/auftragserfassung.service';
 import { AssignmentDto } from '../models/assignmentDto';
 import { CostCenter } from '../models/costCenter';
@@ -9,8 +9,8 @@ import { RoleDto } from '../models/roleDto';
 import { UserDto } from '../models/userDto';
 
 const ASSIGNMENT_DATA: AssignmentDto[] = [
-  {assignmentId: 1, municipal: {id: 1, name: "Hartkirchen"}, costCenter: {costCenterNumber: "X1", costCenterName: "Kostenstelle"}, 
-  email: "ss", assignmentLink: "aa", assignment: "aa", staffSuggestion: "Herbert", 
+  {assignmentId: 1, municipal: {id: 1, name: "Hartkirchen"}, costCenter: {id: 0, description: "X1", category: "32"}, 
+  email: "ss", assignmentLink: "aa", assignmentDescription: "aa", staffSuggestion: "Herbert", 
   start: null, duration: 2, end: null, progress: "a", status: "s", approved: true}
 ]
 
@@ -20,33 +20,43 @@ const ASSIGNMENT_DATA: AssignmentDto[] = [
   styleUrls: ['./auftragserfassung.component.css']
 })
 export class AuftragserfassungComponent implements OnInit {
+  validityButton: Boolean = true;
+
   displayedColumns: string[] = ['assignmentId', 'municipal', 'costCenter', 'email',
-  'assignmentLink', 'assignment', 'staffSuggestion', 'start', 'duration', 'end', 'progress',
+  'assignmentLink', 'assignmentDescription', 'staffSuggestion', 'start', 'duration', 'end', 'progress',
   'status', 'btnAccept', 'btnDelete']
   dataSource = ASSIGNMENT_DATA;
 
   assignmentFormGroup = new FormGroup({
-    municipal: new FormControl(''),
-    costCenter: new FormControl(''),
-    email: new FormControl(''),
+    municipal: new FormControl('', Validators.required),
+    costCenter: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
     path: new FormControl(''),
     assignmentLink: new FormControl(''),
-    assignment: new FormControl(''),
+    assignmentDescription: new FormControl('', Validators.required),
     staffSuggestion: new FormControl(''),
     start: new FormControl(''),
     duration: new FormControl(''),
     end: new FormControl(''),
-    progress: new FormControl(''),
+    progress: new FormControl(0, [Validators.min(0), Validators.max(100)]),
     status: new FormControl(''),
     approved: new FormControl('')
   });
 
   municipals: MunicipalDto[] = [];
 
+  /*
+    ? is costCenterNumber the category of the cost center ???
+  */
+
   costCenters: CostCenter[] = [
-    {costCenterName: "Name 1", costCenterNumber: "1"},
-    {costCenterName: "Name 2", costCenterNumber: "2"}
+    {id: 0, description: 'Cost Center 1', category: "1"},
+    {id: 1, description: 'Cost Center 2', category: "2"}
   ];
+
+  status: String[] = [
+    "Open", "Closed"
+  ]
 
   assignment: AssignmentDto;
 
@@ -56,6 +66,25 @@ export class AuftragserfassungComponent implements OnInit {
   ]
 
   constructor(private auftragsservice: AuftragserfassungService) { }
+
+  //#region Getter
+
+  get municipal() {
+    return this.assignmentFormGroup.get("municipal");
+  }
+
+  get costCenter(){
+    return this.assignmentFormGroup.get("costCenter");
+  }
+
+  get email(){
+    return this.assignmentFormGroup.get("email");
+  }
+  get assignmentDescription(){
+    return this.assignmentFormGroup.get("assignmentDescription");
+  }
+
+  //#endregion
 
   ngOnInit(): void {
     this.assignmentFormGroup.valueChanges.subscribe(x => {
@@ -69,6 +98,8 @@ export class AuftragserfassungComponent implements OnInit {
   }
 
   saveAssignment(): void{
+    this.validityButton = false;
+
     console.log("save assignment...");
     this.assignment = {
       assignmentId: null,
@@ -76,7 +107,7 @@ export class AuftragserfassungComponent implements OnInit {
       municipal: this.assignmentFormGroup.get("municipal").value,
       email: this.assignmentFormGroup.get("email").value,
       assignmentLink: this.assignmentFormGroup.get("assignmentLink").value,
-      assignment: this.assignmentFormGroup.get("assignment").value,
+      assignmentDescription: this.assignmentFormGroup.get("assignmentDescription").value,
       // staffSuggestion: this.assignmentFormGroup.get("staffSuggestion").value,
       staffSuggestion: null,
       start: this.assignmentFormGroup.get("start").value,

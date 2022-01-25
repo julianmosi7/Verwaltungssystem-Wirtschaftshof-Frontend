@@ -1,3 +1,9 @@
 table{
     width: 100%;
 }
+
+.validationError{
+    color: red;
+    text-decoration: none;
+    padding-bottom: 10px;
+}
