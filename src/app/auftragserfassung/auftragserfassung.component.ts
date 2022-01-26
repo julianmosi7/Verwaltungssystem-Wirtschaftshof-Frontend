@@ -10,14 +10,14 @@ import { Status } from '../models/statusDto';
 import { UserDto } from '../models/userDto';
 
 const ASSIGNMENT_DATA: AssignmentDto[] = [
-  {assignmentId: 1, municipal: {id: 1, name: "Hartkirchen"}, costCenter: {id: 0, costId: 'Cx 3', description: "X1", category: "32"}, 
-  email: "ss", assignmentLink: "aa", assignmentDescription: "aa", staffSuggestion: null, 
+  {assignmentId: 1, municipal: {id: 1, name: "Hartkirchen"}, costCenter: {id: 0, costId: 'Cx 3', description: "X1", category: "32"},
+  email: "ss", assignmentLink: "aa", assignmentDescription: "aa", staffSuggestion: null,
   start: null, duration: 2, end: null, progress: null, status: null, approved: true}
 ]
 
 @Component({
   selector: 'app-auftragserfassung',
-  templateUrl: './auftragserfassung.component.html', 
+  templateUrl: './auftragserfassung.component.html',
   styleUrls: ['./auftragserfassung.component.css']
 })
 export class AuftragserfassungComponent implements OnInit {
@@ -51,14 +51,12 @@ export class AuftragserfassungComponent implements OnInit {
   */
 
   costCenters: CostCenter[] = [
-    {id: 0, costId: 'Cx 1', description: 'Cost Center 1', category: "1"},
-    {id: 1, costId: 'Cy 2', description: 'Cost Center 2', category: "2"}
   ];
 
   status: Status[] = [
     {id: 0, name: 'Open'},
     {id: 1, name: 'Closed'}
-  ]
+  ];
 
   assignment: AssignmentDto;
 
@@ -68,7 +66,7 @@ export class AuftragserfassungComponent implements OnInit {
 
      {id: 1, username: "julianmosi", password: "test", firstname: "Julian", lastname: "Moshammer", email: "moshammerju",
      birthdate: null, role: null, licence: null, holidays: null, assignments: null}
-  ]
+  ];
 
   constructor(private auftragsservice: AuftragserfassungService) { }
 
@@ -100,13 +98,18 @@ export class AuftragserfassungComponent implements OnInit {
       console.log(x);
       this.municipals = x;
     });
+
+    this.auftragsservice.getCostcenters().subscribe(x => {
+      console.log(x);
+      this.costCenters = x;
+    });
   }
 
   saveAssignment(): void{
     if(!this.email.valid && (this.email?.dirty || this.email?.touched)){
       this.validityButton = false;
     }
-    
+
     console.log("save assignment...");
     this.assignment = {
       assignmentId: null,
