@@ -30,8 +30,8 @@
         <a style="text-decoration: none; color: black;"><i>{{currentUser}}</i></a> 
       </div>
 
-      <button mat-raised-button color="basic" routerLink="/login" *ngIf="!loggedIn">Login</button>
-      <button mat-raised-button color="warn" routerLink="/login" (click)="logout()" *ngIf="loggedIn">Logout</button>
+      <button mat-raised-button color="basic" routerLink="/login" *ngIf="currentUser == null">Login</button>
+      <button mat-raised-button color="warn" routerLink="/login" (click)="logout()" *ngIf="currentUser">Logout</button>
     </div>
   </div>
   

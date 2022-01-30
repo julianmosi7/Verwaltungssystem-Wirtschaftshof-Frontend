@@ -7,8 +7,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatDatepickerModule } from '@angular/material/datepicker'
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {AppModule} from '../app.module';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -21,7 +23,12 @@ import {AppModule} from '../app.module';
     MatSelectModule,
     MatButtonModule,
     MatTableModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
+  providers: [
+    MatDatepickerModule
   ]
 })
 export class AuftragserfassungModule { }

@@ -1,5 +1,5 @@
 export class HolidayDto{
-    id: number;
+    holidayId: number;
     begin: Date;
     end: Date;
     reason: String;

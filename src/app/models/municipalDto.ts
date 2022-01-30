@@ -1,4 +1,6 @@
+import { AssignmentDto } from "./assignmentDto";
+
 export class MunicipalDto{
-    id: number;
+    municipalId: number;
     name: string;
 }

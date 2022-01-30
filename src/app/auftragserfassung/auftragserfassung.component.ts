@@ -3,15 +3,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuftragserfassungService } from '../core/auftragserfassung.service';
 import { AssignmentDto } from '../models/assignmentDto';
-import { CostCenter } from '../models/costCenter';
+import { CostCenterDto } from '../models/costCenterDto';
 import { MunicipalDto } from '../models/municipalDto';
 import { RoleDto } from '../models/roleDto';
 import { Status } from '../models/statusDto';
 import { UserDto } from '../models/userDto';
 
 const ASSIGNMENT_DATA: AssignmentDto[] = [
-  {assignmentId: 1, municipal: {id: 1, name: "Hartkirchen"}, costCenter: {id: 0, costId: 'Cx 3', description: "X1", category: "32"},
-  email: "ss", assignmentLink: "aa", assignmentDescription: "aa", staffSuggestion: null,
+  {assignmentId: 1, municipal: {municipalId: 1, name: "Hartkirchen"}, costCenter: {costCenterId: 0, cost_id: 'Cx 3', description: "X1", category: "32"},
+  email: "ss", assignmentLink: "aa", assignmentDescription: "aa", personal: null,
   start: null, duration: 2, end: null, progress: null, status: null, approved: true}
 ]
 
@@ -24,7 +24,7 @@ export class AuftragserfassungComponent implements OnInit {
   validityButton: Boolean = true;
 
   displayedColumns: string[] = ['assignmentId', 'municipal', 'costCenter', 'email',
-  'assignmentLink', 'assignmentDescription', 'staffSuggestion', 'start', 'duration', 'end', 'progress',
+  'assignmentLink', 'assignmentDescription', 'personal', 'start', 'duration', 'end', 'progress',
   'status', 'btnAccept', 'btnDelete']
   dataSource = ASSIGNMENT_DATA;
 
@@ -35,7 +35,7 @@ export class AuftragserfassungComponent implements OnInit {
     path: new FormControl(''),
     assignmentLink: new FormControl(''),
     assignmentDescription: new FormControl('', Validators.required),
-    staffSuggestion: new FormControl(''),
+    personal: new FormControl(''),
     start: new FormControl(''),
     duration: new FormControl(''),
     end: new FormControl(''),
@@ -46,25 +46,21 @@ export class AuftragserfassungComponent implements OnInit {
 
   municipals: MunicipalDto[] = [];
 
-  /*
-    ? is costCenterNumber the category of the cost center ???
-  */
-
-  costCenters: CostCenter[] = [
+  costCenters: CostCenterDto[] = [
   ];
 
   status: Status[] = [
-    {id: 0, name: 'Open'},
-    {id: 1, name: 'Closed'}
+    {statusId: 0, name: 'Open'},
+    {statusId: 1, name: 'Closed'}
   ];
 
   assignment: AssignmentDto;
 
   staff: UserDto[] = [
-    {id: 0, username: "selimosi", password: "test", firstname: "Selina", lastname: "Moshammer", email: "moshammersel",
+    {userId: 0, username: "selimosi", password: "test", firstname: "Selina", lastname: "Moshammer", email: "moshammersel",
      birthdate: null, role: null, licence: null, holidays: null, assignments: null},
 
-     {id: 1, username: "julianmosi", password: "test", firstname: "Julian", lastname: "Moshammer", email: "moshammerju",
+     {userId: 1, username: "julianmosi", password: "test", firstname: "Julian", lastname: "Moshammer", email: "moshammerju",
      birthdate: null, role: null, licence: null, holidays: null, assignments: null}
   ];
 
@@ -118,11 +114,10 @@ export class AuftragserfassungComponent implements OnInit {
       email: this.assignmentFormGroup.get("email").value,
       assignmentLink: this.assignmentFormGroup.get("assignmentLink").value,
       assignmentDescription: this.assignmentFormGroup.get("assignmentDescription").value,
-      // staffSuggestion: this.assignmentFormGroup.get("staffSuggestion").value,
-      staffSuggestion: null,
-      start: this.assignmentFormGroup.get("start").value,
+      personal: this.assignmentFormGroup.get("personal").value,
+      start: null,
       duration: this.assignmentFormGroup.get("duration").value,
-      end: this.assignmentFormGroup.get("end").value,
+      end: null,
       progress: this.assignmentFormGroup.get("progress").value,
       status: this.assignmentFormGroup.get("status").value,
       approved: false

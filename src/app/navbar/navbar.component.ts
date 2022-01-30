@@ -8,7 +8,6 @@ import { UserDto } from '../models/userDto';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  loggedIn: boolean;
   currentUser: String;
 
   constructor(private authenticationService: AuthenticationService) { }
@@ -18,10 +17,9 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.currentUser = 'selimosi';
+    this.currentUser = null;
     this.authenticationService.listenLogged().subscribe(x => {
-      this.loggedIn = x;
-      console.log(this.loggedIn);
+      this.currentUser = x;
     });
    
   }

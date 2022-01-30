@@ -1,4 +1,4 @@
 export class LicenceDto{
-    id: number;
+    licenceId: number;
     name: String;
 }

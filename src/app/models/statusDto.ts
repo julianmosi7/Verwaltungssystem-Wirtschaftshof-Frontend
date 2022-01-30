@@ -1,4 +1,4 @@
 export class Status{
-    id: number;
+    statusId: number;
     name: string;
 }

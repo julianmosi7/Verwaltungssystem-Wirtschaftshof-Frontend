@@ -4,7 +4,7 @@ import { LicenceDto } from "./licenceDto";
 import { RoleDto } from "./roleDto";
 
 export class UserDto{
-    id: number;
+    userId: number;
     username: String;
     password: String;
     firstname: string;

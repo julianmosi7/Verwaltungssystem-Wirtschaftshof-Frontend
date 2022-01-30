@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthenticationDto } from '../models/authenticationDto';
 import { TokenDto } from '../models/tokenDto';
+import jwt_decode from "jwt-decode";
 
 
 @Injectable({
@@ -12,7 +13,7 @@ import { TokenDto } from '../models/tokenDto';
 export class AuthenticationService {
   url = 'http://localhost:8081';
 
-  private booleanRepository = new Subject<boolean>();
+  private userRepository = new Subject<String>();
 
   constructor(private http: HttpClient) { }
 
@@ -22,7 +23,13 @@ export class AuthenticationService {
       tap(user => {
         if(user && user.token){
           sessionStorage.setItem('currentUser', JSON.stringify(user));
-          this.notifyLogged();
+          var decoded = jwt_decode(user.token);
+          console.log(decoded);
+          var entries = Object.values(decoded);
+          console.log(entries[0]);
+
+
+          this.notifyLogged(entries[0]);
         }
       })
     );
@@ -31,18 +38,17 @@ export class AuthenticationService {
   public logout(): void{
     console.log('AuthenticationService::logout');
     sessionStorage.removeItem('currentUser');
-    this.notifyLogged();
   }
 
-  public notifyLogged(): void{
+  public notifyLogged(user): void{
     if(sessionStorage.getItem('currentUser')){
-      this.booleanRepository.next(true);
+      this.userRepository.next(user);
     }else{
-      this.booleanRepository.next(false);
+      this.userRepository.next(null);
     }
   }
 
-  public listenLogged(): Observable<boolean>{
-    return this.booleanRepository.asObservable();
+  public listenLogged(): Observable<String>{
+    return this.userRepository.asObservable();
   }
 }

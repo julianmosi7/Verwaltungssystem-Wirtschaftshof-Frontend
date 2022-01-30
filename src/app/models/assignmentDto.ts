@@ -1,16 +1,16 @@
-import { CostCenter } from "./costCenter";
+import { CostCenterDto } from "./costCenterDto";
 import { MunicipalDto } from "./municipalDto";
 import { Status } from "./statusDto";
 import { UserDto } from "./userDto";
 
 export class AssignmentDto{
     assignmentId: number
-    costCenter: CostCenter;
+    costCenter: CostCenterDto;
     municipal: MunicipalDto;
     email: String;
     assignmentLink: String;
     assignmentDescription: String;
-    staffSuggestion: UserDto[];
+    personal: UserDto[];
     start: Date;
     duration: number;
     end: Date;
