@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { MunicipalDto } from '../models/municipalDto';
 // @ts-ignore
 import { CostCenterDto } from '../models/costCenterDto';
+// @ts-ignore
+import { StatusDto } from '../models/statusDto';
 import { AssignmentDto } from '../models/assignmentDto';
 
 @Injectable({
@@ -15,12 +17,17 @@ export class AuftragserfassungService {
   constructor(private http: HttpClient) { }
 
   getMunicipals(): Observable<MunicipalDto[]>{
-    return this.http.get<MunicipalDto[]>(`${this.url}/gemeinde/getAll`);
+    return this.http.get<MunicipalDto[]>(`${this.url}/municipal/getAll`);
   }
 
   getCostcenters(): Observable<CostCenterDto[]>{
-    return this.http.get<CostCenterDto[]>(`${this.url}/Costcenter/getAll`);
+    return this.http.get<CostCenterDto[]>(`${this.url}/costcenter/getAll`);
   }
+
+  getStatus(): Observable<StatusDto[]>{
+    return this.http.get<StatusDto[]>(`${this.url}/status/getAll`);
+  }
+
 
   saveAssignment(assignment: AssignmentDto): Observable<AssignmentDto>{
     console.log(`assignment: ${assignment}`);
