@@ -54,8 +54,6 @@ export class AuftragserfassungComponent implements OnInit {
   ];
 
   status: Status[] = [
-    {id: 0, name: 'Open'},
-    {id: 1, name: 'Closed'}
   ];
 
   assignment: AssignmentDto;
@@ -102,6 +100,11 @@ export class AuftragserfassungComponent implements OnInit {
     this.auftragsservice.getCostcenters().subscribe(x => {
       console.log(x);
       this.costCenters = x;
+    });
+
+    this.auftragsservice.getStatus().subscribe(x => {
+      console.log(x);
+      this.status = x;
     });
   }
 
