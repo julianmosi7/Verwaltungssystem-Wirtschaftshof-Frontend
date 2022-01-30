@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MunicipalDto } from '../models/municipalDto';
 // @ts-ignore
-import { CostCenterDto } from '../models/costCenterDto';
+import { costcenterDto } from '../models/costcenterDto';
 // @ts-ignore
 import { StatusDto } from '../models/statusDto';
 import { AssignmentDto } from '../models/assignmentDto';
@@ -20,8 +20,8 @@ export class AuftragserfassungService {
     return this.http.get<MunicipalDto[]>(`${this.url}/municipal/getAll`);
   }
 
-  getCostcenters(): Observable<CostCenterDto[]>{
-    return this.http.get<CostCenterDto[]>(`${this.url}/costcenter/getAll`);
+  getCostcenters(): Observable<costcenterDto[]>{
+    return this.http.get<costcenterDto[]>(`${this.url}/costcenter/getAll`);
   }
 
   getStatus(): Observable<StatusDto[]>{
@@ -30,11 +30,11 @@ export class AuftragserfassungService {
 
   saveAssignment(assignment: AssignmentDto): Observable<AssignmentDto>{
     console.log(`assignment: ${assignment}`);
-    return this.http.post<AssignmentDto>(`${this.url}/auftrag/newAuftrag`, assignment);
+    return this.http.post<AssignmentDto>(`${this.url}/assignment/newAssignment`, assignment);
   }
 
   updateAssignment(assignment: AssignmentDto): Observable<AssignmentDto>{
-    return this.http.put<AssignmentDto>(`${this.url}/auftrag/editEntry`, assignment);
+    return this.http.put<AssignmentDto>(`${this.url}/assignment/editEntry`, assignment);
   }
 
 }

@@ -3,14 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuftragserfassungService } from '../core/auftragserfassung.service';
 import { AssignmentDto } from '../models/assignmentDto';
-import { CostCenterDto } from '../models/costCenterDto';
+import { CostcenterDto } from '../models/costcenterDto';
 import { MunicipalDto } from '../models/municipalDto';
 import { RoleDto } from '../models/roleDto';
 import { Status } from '../models/statusDto';
 import { UserDto } from '../models/userDto';
 
 const ASSIGNMENT_DATA: AssignmentDto[] = [
-  {assignmentId: 1, municipal: {municipalId: 1, name: "Hartkirchen"}, costCenter: {costCenterId: 0, cost_id: 'Cx 3', description: "X1", category: "32"},
+  {assignmentId: 1, municipal: {municipalId: 1, name: "Hartkirchen"}, costcenter: {costcenterId: 0, cost_id: 'Cx 3', description: "X1", category: "32"},
   email: "ss", assignmentLink: "aa", assignmentDescription: "aa", personal: null,
   start: null, duration: 2, end: null, progress: null, status: null, approved: true}
 ]
@@ -23,14 +23,14 @@ const ASSIGNMENT_DATA: AssignmentDto[] = [
 export class AuftragserfassungComponent implements OnInit {
   validityButton: Boolean = true;
 
-  displayedColumns: string[] = ['assignmentId', 'municipal', 'costCenter', 'email',
+  displayedColumns: string[] = ['assignmentId', 'municipal', 'costcenter', 'email',
   'assignmentLink', 'assignmentDescription', 'personal', 'start', 'duration', 'end', 'progress',
   'status', 'btnAccept', 'btnDelete']
   dataSource = ASSIGNMENT_DATA;
 
   assignmentFormGroup = new FormGroup({
     municipal: new FormControl('', Validators.required),
-    costCenter: new FormControl('', Validators.required),
+    costcenter: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
     path: new FormControl(''),
     assignmentLink: new FormControl(''),
@@ -46,7 +46,7 @@ export class AuftragserfassungComponent implements OnInit {
 
   municipals: MunicipalDto[] = [];
 
-  costCenters: CostCenterDto[] = [
+  costcenters: CostcenterDto[] = [
   ];
 
   status: Status[] = [
@@ -70,8 +70,8 @@ export class AuftragserfassungComponent implements OnInit {
     return this.assignmentFormGroup.get("municipal");
   }
 
-  get costCenter(){
-    return this.assignmentFormGroup.get("costCenter");
+  get costcenter(){
+    return this.assignmentFormGroup.get("costcenter");
   }
 
   get email(){
@@ -95,7 +95,7 @@ export class AuftragserfassungComponent implements OnInit {
 
     this.auftragsservice.getCostcenters().subscribe(x => {
       console.log(x);
-      this.costCenters = x;
+      this.costcenters = x;
     });
 
     this.auftragsservice.getStatus().subscribe(x => {
@@ -112,7 +112,7 @@ export class AuftragserfassungComponent implements OnInit {
     console.log("save assignment...");
     this.assignment = {
       assignmentId: null,
-      costCenter: this.assignmentFormGroup.get("costCenter").value,
+      costcenter: this.assignmentFormGroup.get("costcenter").value,
       municipal: this.assignmentFormGroup.get("municipal").value,
       email: this.assignmentFormGroup.get("email").value,
       assignmentLink: this.assignmentFormGroup.get("assignmentLink").value,
