@@ -33,24 +33,24 @@
           <div class="col-sm-2">
             <mat-form-field>
               <mat-label>Kostenstelle</mat-label>
-              <mat-select formControlName="costCenter">
+              <mat-select formControlName="costcenter">
                 <mat-option
-                  *ngFor="let costCenter of costCenters"
-                  [value]="costCenter"
+                  *ngFor="let costcenter of costcenters"
+                  [value]="costcenter"
                 >
-                  {{ costCenter.description }}
+                  {{ costcenter.description }}
                 </mat-option>
               </mat-select>
 
             </mat-form-field>
-            <a [style.color]="!costCenter?.valid && (costCenter?.dirty || costCenter?.touched) ? 'red' : 'black'">
+            <a [style.color]="!costcenter?.valid && (costcenter?.dirty || costcenter?.touched) ? 'red' : 'black'">
               *
             </a>
 
 
-            <div *ngIf="(!costCenter?.valid && (costCenter?.dirty || costCenter?.touched)) || validityButton == false">
-              <div class="validationError" [hidden]="!costCenter.errors.required">
-                <a>CostCenter is required!</a>
+            <div *ngIf="(!costcenter?.valid && (costcenter?.dirty || costcenter?.touched)) || validityButton == false">
+              <div class="validationError" [hidden]="!costcenter.errors.required">
+                <a>costcenter is required!</a>
               </div>
             </div>
           </div>
