@@ -28,6 +28,10 @@ export class AuftragserfassungService {
     return this.http.get<StatusDto[]>(`${this.url}/status/getAll`);
   }
 
+  getAssignments(): Observable<AssignmentDto[]>{
+    return this.http.get<AssignmentDto[]>(`${this.url}/assignment/getAll`);
+  }
+
   saveAssignment(assignment: AssignmentDto): Observable<AssignmentDto>{
     console.log(`assignment: ${assignment}`);
     return this.http.post<AssignmentDto>(`${this.url}/auftrag/newAuftrag`, assignment);

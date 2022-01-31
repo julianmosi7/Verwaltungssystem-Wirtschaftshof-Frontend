@@ -7,9 +7,9 @@ export class UserDto{
     userId: number;
     username: String;
     password: String;
-    firstname: string;
-    lastname: string;
-    email: string;
+    firstname: String;
+    lastname: String;
+    email: String;
     birthdate: Date;
     role: RoleDto;
     licence: LicenceDto[];

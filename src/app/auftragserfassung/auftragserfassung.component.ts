@@ -10,8 +10,8 @@ import { Status } from '../models/statusDto';
 import { UserDto } from '../models/userDto';
 
 const ASSIGNMENT_DATA: AssignmentDto[] = [
-  {assignmentId: 1, municipal: {municipalId: 1, name: "Hartkirchen"}, costCenter: {costCenterId: 0, cost_id: 'Cx 3', description: "X1", category: "32"},
-  email: "ss", assignmentLink: "aa", assignmentDescription: "aa", personal: null,
+  {assignment_id: 1, municipal: {municipalId: 1, name: "Hartkirchen"}, costCenter: {costCenterId: 0, cost_id: 'Cx 3', description: "X1", category: "32"},
+  email: "ss", link: "aa", assignmentDescription: "aa", personal: null,
   start: null, duration: 2, end: null, progress: null, status: null, approved: true}
 ]
 
@@ -23,10 +23,14 @@ const ASSIGNMENT_DATA: AssignmentDto[] = [
 export class AuftragserfassungComponent implements OnInit {
   validityButton: Boolean = true;
 
-  displayedColumns: string[] = ['assignmentId', 'municipal', 'costCenter', 'email',
+  displayedColumns: string[] = ['assignmentId', 'email',
   'assignmentLink', 'assignmentDescription', 'personal', 'start', 'duration', 'end', 'progress',
   'status', 'btnAccept', 'btnDelete']
-  dataSource = ASSIGNMENT_DATA;
+  //dataSource = ASSIGNMENT_DATA;
+
+  assignments: AssignmentDto[] = [];
+
+  dataSource = this.assignments;
 
   assignmentFormGroup = new FormGroup({
     municipal: new FormControl('', Validators.required),
@@ -43,6 +47,7 @@ export class AuftragserfassungComponent implements OnInit {
     status: new FormControl(''),
     approved: new FormControl('')
   });
+
 
   municipals: MunicipalDto[] = [];
 
@@ -102,6 +107,12 @@ export class AuftragserfassungComponent implements OnInit {
       console.log(x);
       this.status = x;
     });
+
+    this.auftragsservice.getAssignments().subscribe(x => {
+      console.log(x);
+      this.assignments = x;
+      this.dataSource = this.assignments;
+    })
   }
 
   saveAssignment(): void{
@@ -111,11 +122,11 @@ export class AuftragserfassungComponent implements OnInit {
 
     console.log("save assignment...");
     this.assignment = {
-      assignmentId: null,
+      assignment_id: null,
       costCenter: this.assignmentFormGroup.get("costCenter").value,
       municipal: this.assignmentFormGroup.get("municipal").value,
       email: this.assignmentFormGroup.get("email").value,
-      assignmentLink: this.assignmentFormGroup.get("assignmentLink").value,
+      link: this.assignmentFormGroup.get("assignmentLink").value,
       assignmentDescription: this.assignmentFormGroup.get("assignmentDescription").value,
       personal: this.assignmentFormGroup.get("personal").value,
       start: null,
@@ -130,7 +141,7 @@ export class AuftragserfassungComponent implements OnInit {
 
     this.auftragsservice.saveAssignment(this.assignment).subscribe(x => {
       console.log(x);
-      //TODO: create new row to table, after assignment was sent
+      //TODO: create new row to table, after assignment was sent and added successfully
     });
   }
 
