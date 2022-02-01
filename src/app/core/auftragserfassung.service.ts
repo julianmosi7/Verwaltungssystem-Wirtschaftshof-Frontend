@@ -32,6 +32,14 @@ export class AuftragserfassungService {
     return this.http.get<AssignmentDto[]>(`${this.url}/assignment/getAll`);
   }
 
+  getAllAssignmentsNotApproved(): Observable<AssignmentDto[]>{
+    return this.http.get<AssignmentDto[]>(`${this.http}/assignment/getAllNotApproved`);
+  }
+
+  deleteAssignment(assignmentId: number): Observable<AssignmentDto>{
+    return this.http.delete<AssignmentDto>(`${this.http}/assignment/deleteAssignment/${assignmentId}`);
+  }
+
   saveAssignment(assignment: AssignmentDto): Observable<AssignmentDto>{
     console.log(`assignment: ${assignment}`);
     return this.http.post<AssignmentDto>(`${this.url}/assignment/newAssignment`, assignment);

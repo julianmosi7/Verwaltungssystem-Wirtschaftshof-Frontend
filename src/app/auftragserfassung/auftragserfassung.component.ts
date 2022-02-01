@@ -10,7 +10,7 @@ import { Status } from '../models/statusDto';
 import { UserDto } from '../models/userDto';
 
 const ASSIGNMENT_DATA: AssignmentDto[] = [
-  {assignment_id: 1, municipal: {municipalId: 1, name: "Hartkirchen"}, costCenter: {costCenterId: 0, cost_id: 'Cx 3', description: "X1", category: "32"},
+  {assignment_id: 1, municipal: {municipalId: 1, name: "Hartkirchen"}, costCenter: {costcenterId: 0, cost_id: 'Cx 3', description: "X1", category: "32"},
   email: "ss", link: "aa", assignmentDescription: "aa", personal: null,
   start: null, duration: 2, end: null, progress: null, status: null, approved: true}
 ]
@@ -107,12 +107,21 @@ export class AuftragserfassungComponent implements OnInit {
       console.log(x);
       this.status = x;
     });
+  
+    /* 
+      ! assignmentsNotApproved not working
+    */
 
+    this.loadAssignments();
+    
+  }
+
+  loadAssignments(){
     this.auftragsservice.getAssignments().subscribe(x => {
       console.log(x);
       this.assignments = x;
       this.dataSource = this.assignments;
-    })
+    });
   }
 
   saveAssignment(): void{
@@ -141,16 +150,22 @@ export class AuftragserfassungComponent implements OnInit {
 
     this.auftragsservice.saveAssignment(this.assignment).subscribe(x => {
       console.log(x);
-      //TODO: create new row to table, after assignment was sent and added successfully
+      this.loadAssignments();
     });
   }
 
-  updateAssignment(assignment: AssignmentDto, approved: boolean): void{
-    console.log("update assignment...");
-    assignment.approved = approved;
+  updateAssignment(assignment: AssignmentDto): void{
+    assignment.approved = true;
     this.auftragsservice.updateAssignment(this.assignment).subscribe(x => {
       console.log(x);
-      //TODO: delete from row, if accepted or deleted
-    })
+      this.loadAssignments();
+    });
+  }
+
+  deleteAssignment(assignmentId: number){
+    this.auftragsservice.deleteAssignment(assignmentId).subscribe(x => {
+      console.log(x);
+      this.loadAssignments();
+    });
   }
 }

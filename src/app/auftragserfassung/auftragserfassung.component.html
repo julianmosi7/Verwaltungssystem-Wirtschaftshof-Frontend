@@ -242,14 +242,14 @@
       <ng-container matColumnDef="btnAccept">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let assignment">
-          <button mat-raised-button color="basic" (click)="updateAssignment(assignment, true)">Accept</button>
+          <button mat-raised-button color="basic" (click)="updateAssignment(assignment)">Accept</button>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="btnDelete">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let assignment">
-          <button mat-raised-button color="warn" (click)="updateAssignment(assignment, false)">Delete</button>
+          <button mat-raised-button color="warn" (click)="deleteAssignment(assignment.assignmentId)">Delete</button>
         </td>
       </ng-container>
 
