@@ -37,7 +37,7 @@ export class AuftragserfassungService {
   }
 
   deleteAssignment(assignmentId: number): Observable<AssignmentDto>{
-    return this.http.delete<AssignmentDto>(`${this.http}/assignment/deleteAssignment/${assignmentId}`);
+    return this.http.delete<AssignmentDto>(`${this.url}/assignment/deleteAssignment/${assignmentId}`);
   }
 
   saveAssignment(assignment: AssignmentDto): Observable<AssignmentDto>{
@@ -46,7 +46,7 @@ export class AuftragserfassungService {
   }
 
   updateAssignment(assignment: AssignmentDto): Observable<AssignmentDto>{
-    return this.http.put<AssignmentDto>(`${this.url}/assignment/editEntry`, assignment);
+    return this.http.put<AssignmentDto>(`${this.url}/assignment/editAssignment`, assignment);
   }
 
 }

@@ -10,9 +10,7 @@ import { Status } from '../models/statusDto';
 import { UserDto } from '../models/userDto';
 
 const ASSIGNMENT_DATA: AssignmentDto[] = [
-  {assignment_id: 1, municipal: {municipalId: 1, name: "Hartkirchen"}, costCenter: {costcenterId: 0, cost_id: 'Cx 3', description: "X1", category: "32"},
-  email: "ss", link: "aa", assignmentDescription: "aa", personal: null,
-  start: null, duration: 2, end: null, progress: null, status: null, approved: true}
+
 ]
 
 @Component({
@@ -63,7 +61,7 @@ export class AuftragserfassungComponent implements OnInit {
     {userId: 0, username: "selimosi", password: "test", firstname: "Selina", lastname: "Moshammer", email: "moshammersel",
      birthdate: null, role: null, licence: null, holidays: null, assignments: null},
 
-     {userId: 1, username: "julianmosi", password: "test", firstname: "Julian", lastname: "Moshammer", email: "moshammerju",
+     {userId: 1, username: "tamx", password: "test", firstname: "Tamara", lastname: "Enser", email: "tams",
      birthdate: null, role: null, licence: null, holidays: null, assignments: null}
   ];
 
@@ -107,13 +105,13 @@ export class AuftragserfassungComponent implements OnInit {
       console.log(x);
       this.status = x;
     });
-  
-    /* 
+
+    /*
       ! assignmentsNotApproved not working
     */
 
     this.loadAssignments();
-    
+
   }
 
   loadAssignments(){
@@ -131,13 +129,13 @@ export class AuftragserfassungComponent implements OnInit {
 
     console.log("save assignment...");
     this.assignment = {
-      assignment_id: null,
-      costCenter: this.assignmentFormGroup.get("costCenter").value,
+      assignmentId: null,
+      costcenter: this.assignmentFormGroup.get("costcenter").value,
       municipal: this.assignmentFormGroup.get("municipal").value,
       email: this.assignmentFormGroup.get("email").value,
       link: this.assignmentFormGroup.get("assignmentLink").value,
       assignmentDescription: this.assignmentFormGroup.get("assignmentDescription").value,
-      personal: this.assignmentFormGroup.get("personal").value,
+      personal: null,
       start: null,
       duration: this.assignmentFormGroup.get("duration").value,
       end: null,
