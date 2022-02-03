@@ -4,7 +4,7 @@ import { Status } from "./statusDto";
 import { UserDto } from "./userDto";
 
 export class AssignmentDto{
-    assignmentId: number
+    assignmentId: number;
     costcenter: CostcenterDto;
     municipal: MunicipalDto;
     email: String;
