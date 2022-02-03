@@ -21,7 +21,7 @@ const ASSIGNMENT_DATA: AssignmentDto[] = [
 export class AuftragserfassungComponent implements OnInit {
   validityButton: Boolean = true;
 
-  displayedColumns: string[] = ['assignmentId', 'email',
+  displayedColumns: string[] = ['assignmentId', 'municipal', 'costcenter', 'email',
   'assignmentLink', 'assignmentDescription', 'personal', 'start', 'duration', 'end', 'progress',
   'status', 'btnAccept', 'btnDelete'];
   // dataSource = ASSIGNMENT_DATA;
@@ -106,10 +106,6 @@ export class AuftragserfassungComponent implements OnInit {
       this.status = x;
     });
 
-    /*
-      ! assignmentsNotApproved not working
-    */
-
     this.loadAssignments();
 
   }
@@ -129,7 +125,7 @@ export class AuftragserfassungComponent implements OnInit {
 
     console.log('save assignment...');
     this.assignment = {
-      assignmentId: null,
+      assignment_id: null,
       costcenter: this.assignmentFormGroup.get('costcenter').value,
       municipal: this.assignmentFormGroup.get('municipal').value,
       email: this.assignmentFormGroup.get('email').value,
@@ -153,6 +149,7 @@ export class AuftragserfassungComponent implements OnInit {
   }
 
   updateAssignment(assignment: AssignmentDto): void{
+    console.log(assignment);
     this.auftragsservice.setApproved(assignment.assignment_id).subscribe(x => {
       console.log(x);
       this.loadAssignments();
