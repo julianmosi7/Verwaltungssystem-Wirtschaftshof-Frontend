@@ -33,11 +33,11 @@ export class AuftragserfassungService {
   }
 
   getAllAssignmentsNotApproved(): Observable<AssignmentDto[]>{
-    return this.http.get<AssignmentDto[]>(`${this.http}/assignment/getAllNotApproved`);
+    return this.http.get<AssignmentDto[]>(`${this.url}/assignment/getAllNotApproved`);
   }
 
   deleteAssignment(assignmentId: number): Observable<AssignmentDto>{
-    return this.http.delete<AssignmentDto>(`${this.http}/assignment/deleteAssignment/${assignmentId}`);
+    return this.http.delete<AssignmentDto>(`${this.url}/assignment/deleteAssignment/${assignmentId}`);
   }
 
   saveAssignment(assignment: AssignmentDto): Observable<AssignmentDto>{
@@ -45,8 +45,12 @@ export class AuftragserfassungService {
     return this.http.post<AssignmentDto>(`${this.url}/assignment/newAssignment`, assignment);
   }
 
-  updateAssignment(assignment: AssignmentDto): Observable<AssignmentDto>{
-    return this.http.put<AssignmentDto>(`${this.url}/assignment/editEntry`, assignment);
+  updateAssignment(assignmentId: number, assignment: AssignmentDto): Observable<AssignmentDto>{
+    return this.http.put<AssignmentDto>(`${this.url}/assignment/updateAssignment/${assignmentId}`, assignment);
+  }
+
+  setApproved(assignmentId: number): Observable<AssignmentDto>{
+    return this.http.get<AssignmentDto>(`${this.url}/assignment/approveAssignment/${assignmentId}`)
   }
 
 }

@@ -117,7 +117,7 @@ export class AuftragserfassungComponent implements OnInit {
   }
 
   loadAssignments(){
-    this.auftragsservice.getAssignments().subscribe(x => {
+    this.auftragsservice.getAllAssignmentsNotApproved().subscribe(x => {
       console.log(x);
       this.assignments = x;
       this.dataSource = this.assignments;
@@ -155,15 +155,14 @@ export class AuftragserfassungComponent implements OnInit {
   }
 
   updateAssignment(assignment: AssignmentDto): void{
-    assignment.approved = true;
-    this.auftragsservice.updateAssignment(this.assignment).subscribe(x => {
+    this.auftragsservice.setApproved(assignment.assignment_id).subscribe(x => {
       console.log(x);
       this.loadAssignments();
     });
   }
 
-  deleteAssignment(assignmentId: number){
-    this.auftragsservice.deleteAssignment(assignmentId).subscribe(x => {
+  deleteAssignment(assignment: AssignmentDto){
+    this.auftragsservice.deleteAssignment(assignment.assignment_id).subscribe(x => {
       console.log(x);
       this.loadAssignments();
     });
