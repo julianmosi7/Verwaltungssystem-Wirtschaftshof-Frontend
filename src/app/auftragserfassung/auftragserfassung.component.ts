@@ -132,15 +132,15 @@ export class AuftragserfassungComponent implements OnInit {
       link: this.assignmentFormGroup.get('assignmentLink').value,
       assignmentDescription: this.assignmentFormGroup.get('assignmentDescription').value,
       personal: null,
-      start: null,
-      duration: this.assignmentFormGroup.get('duration').value,
-      end: null,
+      start: this.assignmentFormGroup.get('start').value,
+     // duration: this.assignmentFormGroup.get('duration').value,
+      end: this.assignmentFormGroup.get('end').value,
       progress: this.assignmentFormGroup.get('progress').value,
       status: this.assignmentFormGroup.get('status').value,
       approved: false
     };
 
-    console.log(this.assignment);
+    console.log(typeof this.assignment.end);
 
     this.auftragsservice.saveAssignment(this.assignment).subscribe(x => {
       console.log(x);
@@ -162,4 +162,14 @@ export class AuftragserfassungComponent implements OnInit {
       this.loadAssignments();
     });
   }
+
+  calculateDiff( assignment: AssignmentDto) {
+   const startDate = new Date(assignment.start);
+   const endDate = new Date(assignment.end);
+   const diffInMs = (endDate.getTime() - startDate.getTime());
+   return diffInMs / (1000 * 3600 * 24) + ' Tage';
+  }
+
+
+
 }
