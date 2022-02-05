@@ -8,12 +8,12 @@ import { UserDto } from '../models/userDto';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  currentUser: String;
 
   constructor(private authenticationService: AuthenticationService) { }
 
   // tslint:disable-next-line:typedef
   static user: UserDto;
+  currentUser: String;
 
 
   ngOnInit(): void {
@@ -21,7 +21,6 @@ export class NavbarComponent implements OnInit {
     this.authenticationService.listenLogged().subscribe(x => {
       this.currentUser = x;
     });
-   
   }
 
   logout() {

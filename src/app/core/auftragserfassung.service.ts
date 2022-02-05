@@ -7,6 +7,7 @@ import { costcenterDto } from '../models/costcenterDto';
 // @ts-ignore
 import { StatusDto } from '../models/statusDto';
 import { AssignmentDto } from '../models/assignmentDto';
+import {UserDto} from '../models/userDto';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,10 @@ export class AuftragserfassungService {
     return this.http.get<StatusDto[]>(`${this.url}/status/getAll`);
   }
 
+  getUserss(): Observable<UserDto[]>{
+    return this.http.get<UserDto[]>(`${this.url}/user/getAll`);
+  }
+
   getAssignments(): Observable<AssignmentDto[]>{
     return this.http.get<AssignmentDto[]>(`${this.url}/assignment/getAll`);
   }
@@ -42,7 +47,9 @@ export class AuftragserfassungService {
 
   saveAssignment(assignment: AssignmentDto): Observable<AssignmentDto>{
     console.log(`assignment: ${assignment}`);
-    return this.http.post<AssignmentDto>(`${this.url}/assignment/newAssignment`, assignment);
+
+
+    return this.http.post<AssignmentDto>(`${this.url}/assignment/newAssignment/`, assignment);
   }
 
   updateAssignment(assignmentId: number, assignment: AssignmentDto): Observable<AssignmentDto>{
@@ -50,7 +57,7 @@ export class AuftragserfassungService {
   }
 
   setApproved(assignmentId: number): Observable<AssignmentDto>{
-    return this.http.get<AssignmentDto>(`${this.url}/assignment/approveAssignment/${assignmentId}`)
+    return this.http.get<AssignmentDto>(`${this.url}/assignment/approveAssignment/${assignmentId}`);
   }
 
 }
