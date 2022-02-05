@@ -8,7 +8,6 @@ import { MunicipalDto } from '../models/municipalDto';
 import { RoleDto } from '../models/roleDto';
 import { Status } from '../models/statusDto';
 import { UserDto } from '../models/userDto';
-import {AuthenticationService} from '../core/authentication.service';
 
 const ASSIGNMENT_DATA: AssignmentDto[] = [
 
@@ -50,9 +49,9 @@ export class AuftragserfassungComponent implements OnInit {
   static user: UserDto;
   validityButton: Boolean = true;
 
-  displayedColumns: string[] = ['assignment_id', 'municipal', 'costcenter', 'email',
-    'assignmentLink', 'assignmentDescription', 'personal', 'start', 'duration', 'end', 'progress',
-    'status', 'btnAccept', 'btnDelete'];
+  displayedColumns: string[] = ['assignmentId', 'municipal', 'costcenter', 'email',
+  'assignmentLink', 'assignmentDescription', 'personal', 'start', 'duration', 'end', 'progress',
+  'status', 'btnAccept', 'btnDelete'];
   // dataSource = ASSIGNMENT_DATA;
 
   assignments: AssignmentDto[] = [];
@@ -86,6 +85,24 @@ export class AuftragserfassungComponent implements OnInit {
 
   staff: UserDto[] = [];
 
+  constructor(private auftragsservice: AuftragserfassungService) { }
+
+  //#region Getter
+
+  get municipal() {
+    return this.assignmentFormGroup.get('municipal');
+  }
+
+  get costcenter(){
+    return this.assignmentFormGroup.get('costcenter');
+  }
+
+  get email(){
+    return this.assignmentFormGroup.get('email');
+  }
+  get assignmentDescription(){
+    return this.assignmentFormGroup.get('assignmentDescription');
+  }
 
   //#endregion
 
@@ -140,14 +157,14 @@ export class AuftragserfassungComponent implements OnInit {
       assignmentDescription: this.assignmentFormGroup.get('assignmentDescription').value,
       personal: this.assignmentFormGroup.get('personal').value,
       start: this.assignmentFormGroup.get('start').value,
-      // duration: this.assignmentFormGroup.get('duration').value,
+     // duration: this.assignmentFormGroup.get('duration').value,
       end: this.assignmentFormGroup.get('end').value,
       progress: this.assignmentFormGroup.get('progress').value,
       status: this.assignmentFormGroup.get('status').value,
       approved: false
     };
 
-    console.log(this.assignmentFormGroup.get('personal').value);
+    console.log(typeof this.assignment.end);
 
     this.auftragsservice.saveAssignment(this.assignment).subscribe(x => {
       console.log(x);
@@ -163,19 +180,20 @@ export class AuftragserfassungComponent implements OnInit {
     });
   }
 
-  deleteAssignment(assignment: AssignmentDto) {
+  deleteAssignment(assignment: AssignmentDto){
     this.auftragsservice.deleteAssignment(assignment.assignment_id).subscribe(x => {
       console.log(x);
       this.loadAssignments();
     });
   }
 
-  calculateDiff(assignment: AssignmentDto) {
-    const startDate = new Date(assignment.start);
-    const endDate = new Date(assignment.end);
-    const diffInMs = (endDate.getTime() - startDate.getTime());
-    return diffInMs / (1000 * 3600 * 24) + ' Tage';
+  calculateDiff( assignment: AssignmentDto) {
+   const startDate = new Date(assignment.start);
+   const endDate = new Date(assignment.end);
+   const diffInMs = (endDate.getTime() - startDate.getTime());
+   return diffInMs / (1000 * 3600 * 24) + ' Tage';
   }
+
 
 
 }
