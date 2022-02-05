@@ -39,7 +39,6 @@ export class AuftragserfassungComponent implements OnInit {
     assignmentDescription: new FormControl('', Validators.required),
     personal: new FormControl(''),
     start: new FormControl(''),
-    duration: new FormControl(''),
     end: new FormControl(''),
     progress: new FormControl(0, [Validators.min(0), Validators.max(100)]),
     status: new FormControl(''),
@@ -162,13 +161,10 @@ export class AuftragserfassungComponent implements OnInit {
     });
   }
 
-  calculateDiff( assignment: AssignmentDto) {
+  calculateDiff(assignment: AssignmentDto) {
    const startDate = new Date(assignment.start);
    const endDate = new Date(assignment.end);
    const diffInMs = (endDate.getTime() - startDate.getTime());
    return diffInMs / (1000 * 3600 * 24) + ' Tage';
   }
-
-
-
 }
