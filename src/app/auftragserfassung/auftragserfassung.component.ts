@@ -19,9 +19,12 @@ const ASSIGNMENT_DATA: AssignmentDto[] = [
   styleUrls: ['./auftragserfassung.component.css']
 })
 export class AuftragserfassungComponent implements OnInit {
+
+
+  static user: UserDto;
   validityButton: Boolean = true;
 
-  displayedColumns: string[] = ['assignmentId', 'municipal', 'costcenter', 'email',
+  displayedColumns: string[] = ['assignment_id', 'municipal', 'costcenter', 'email',
   'assignmentLink', 'assignmentDescription', 'personal', 'start', 'duration', 'end', 'progress',
   'status', 'btnAccept', 'btnDelete'];
   // dataSource = ASSIGNMENT_DATA;
@@ -39,6 +42,7 @@ export class AuftragserfassungComponent implements OnInit {
     assignmentDescription: new FormControl('', Validators.required),
     personal: new FormControl(''),
     start: new FormControl(''),
+    duration: new FormControl(''),
     end: new FormControl(''),
     progress: new FormControl(0, [Validators.min(0), Validators.max(100)]),
     status: new FormControl(''),
@@ -48,21 +52,13 @@ export class AuftragserfassungComponent implements OnInit {
 
   municipals: MunicipalDto[] = [];
 
-  costcenters: CostcenterDto[] = [
-  ];
+  costcenters: CostcenterDto[] = [];
 
-  status: Status[] = [
-  ];
+  status: Status[] = [];
 
   assignment: AssignmentDto;
 
-  staff: UserDto[] = [
-    {userId: 0, username: 'selimosi', password: 'test', firstname: 'Selina', lastname: 'Moshammer', email: 'moshammersel',
-     birthdate: null, role: null, licence: null, holidays: null, assignments: null},
-
-     {userId: 1, username: 'tamx', password: 'test', firstname: 'Tamara', lastname: 'Enser', email: 'tams',
-     birthdate: null, role: null, licence: null, holidays: null, assignments: null}
-  ];
+  staff: UserDto[] = [];
 
   constructor(private auftragsservice: AuftragserfassungService) { }
 
@@ -105,11 +101,15 @@ export class AuftragserfassungComponent implements OnInit {
       this.status = x;
     });
 
+    this.auftragsservice.getUserss().subscribe(x => {
+      console.log(x);
+      this.staff = x;
+    });
     this.loadAssignments();
 
   }
 
-  loadAssignments(){
+  loadAssignments() {
     this.auftragsservice.getAllAssignmentsNotApproved().subscribe(x => {
       console.log(x);
       this.assignments = x;
@@ -117,8 +117,8 @@ export class AuftragserfassungComponent implements OnInit {
     });
   }
 
-  saveAssignment(): void{
-    if (!this.email.valid && (this.email?.dirty || this.email?.touched)){
+  saveAssignment(): void {
+    if (!this.email.valid && (this.email?.dirty || this.email?.touched)) {
       this.validityButton = false;
     }
 
@@ -130,8 +130,9 @@ export class AuftragserfassungComponent implements OnInit {
       email: this.assignmentFormGroup.get('email').value,
       link: this.assignmentFormGroup.get('assignmentLink').value,
       assignmentDescription: this.assignmentFormGroup.get('assignmentDescription').value,
-      personal: null,
+      personal: this.assignmentFormGroup.get('personal').value,
       start: this.assignmentFormGroup.get('start').value,
+     // duration: this.assignmentFormGroup.get('duration').value,
       end: this.assignmentFormGroup.get('end').value,
       progress: this.assignmentFormGroup.get('progress').value,
       status: this.assignmentFormGroup.get('status').value,
@@ -146,7 +147,7 @@ export class AuftragserfassungComponent implements OnInit {
     });
   }
 
-  updateAssignment(assignment: AssignmentDto): void{
+  updateAssignment(assignment: AssignmentDto): void {
     console.log(assignment);
     this.auftragsservice.setApproved(assignment.assignment_id).subscribe(x => {
       console.log(x);
@@ -161,10 +162,13 @@ export class AuftragserfassungComponent implements OnInit {
     });
   }
 
-  calculateDiff(assignment: AssignmentDto) {
+  calculateDiff( assignment: AssignmentDto) {
    const startDate = new Date(assignment.start);
    const endDate = new Date(assignment.end);
    const diffInMs = (endDate.getTime() - startDate.getTime());
    return diffInMs / (1000 * 3600 * 24) + ' Tage';
   }
+
+
+
 }

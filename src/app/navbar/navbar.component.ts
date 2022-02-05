@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
     }else{
       console.log("no user found");
     }
-    
+
     this.authenticationService.listenLogged().subscribe(x => {
       console.log("logged in:");
       console.log(x);
