@@ -12,7 +12,7 @@ export class AssignmentDto{
     assignmentDescription: String;
     personal: UserDto[];
     start: Date;
-    duration: number;
+    //duration: number;
     end: Date;
     progress: number;
     status: Status;
