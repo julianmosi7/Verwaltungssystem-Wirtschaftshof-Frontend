@@ -132,9 +132,9 @@ export class AuftragserfassungComponent implements OnInit {
       link: this.assignmentFormGroup.get('assignmentLink').value,
       assignmentDescription: this.assignmentFormGroup.get('assignmentDescription').value,
       personal: null,
-      start: null,
+      start: this.assignmentFormGroup.get('start').value,
       duration: this.assignmentFormGroup.get('duration').value,
-      end: null,
+      end: this.assignmentFormGroup.get('end').value,
       progress: this.assignmentFormGroup.get('progress').value,
       status: this.assignmentFormGroup.get('status').value,
       approved: false

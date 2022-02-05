@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../core/authentication.service';
 import { UserDto } from '../models/userDto';
+import { TokenDto } from '../models/tokenDto';
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-navbar',
@@ -8,6 +10,7 @@ import { UserDto } from '../models/userDto';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  tokenString: string;
   currentUser: String;
 
   constructor(private authenticationService: AuthenticationService) { }
@@ -17,11 +20,35 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.currentUser = null;
+    if(sessionStorage.getItem("currentUser")){
+      this.getCurrentUser();
+    }else{
+      console.log("no user found");
+    }
+    
     this.authenticationService.listenLogged().subscribe(x => {
-      this.currentUser = x;
+      console.log("logged in:");
+      console.log(x);
+      if(x){
+        this.getCurrentUser();
+      }else{
+        console.log("no user found");
+      }
     });
-   
+  }
+
+  getCurrentUser(): void{
+    console.log("currentUser in getCurrentUserMethod:");
+    console.log(sessionStorage.getItem("currentUser"));
+
+    this.tokenString = sessionStorage.getItem("currentUser");
+    JSON.parse(this.tokenString).token;
+    var decoded = jwt_decode(this.tokenString);
+    console.log(decoded);
+    var entries = Object.values(decoded);
+    console.log(entries[0]);
+
+    this.currentUser = entries[0];
   }
 
   logout() {

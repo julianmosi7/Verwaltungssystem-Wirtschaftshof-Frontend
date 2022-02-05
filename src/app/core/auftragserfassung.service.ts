@@ -7,6 +7,7 @@ import { costcenterDto } from '../models/costcenterDto';
 // @ts-ignore
 import { StatusDto } from '../models/statusDto';
 import { AssignmentDto } from '../models/assignmentDto';
+import { UserDto } from '../models/userDto';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,10 @@ export class AuftragserfassungService {
 
   setApproved(assignmentId: number): Observable<AssignmentDto>{
     return this.http.get<AssignmentDto>(`${this.url}/assignment/approveAssignment/${assignmentId}`)
+  }
+
+  getUserByUsername(username: String): Observable<UserDto>{
+    return this.http.get<UserDto>(`${this.url}/user/getUserByUsername/${username}`);
   }
 
 }

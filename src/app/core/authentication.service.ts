@@ -13,7 +13,7 @@ import jwt_decode from "jwt-decode";
 export class AuthenticationService {
   url = 'http://localhost:8081';
 
-  private userRepository = new Subject<String>();
+  private userRepository = new Subject<Boolean>();
 
   constructor(private http: HttpClient) { }
 
@@ -23,13 +23,7 @@ export class AuthenticationService {
       tap(user => {
         if(user && user.token){
           sessionStorage.setItem('currentUser', JSON.stringify(user));
-          var decoded = jwt_decode(user.token);
-          console.log(decoded);
-          var entries = Object.values(decoded);
-          console.log(entries[0]);
-
-
-          this.notifyLogged(entries[0]);
+          this.notifyLogged();
         }
       })
     );
@@ -40,15 +34,15 @@ export class AuthenticationService {
     sessionStorage.removeItem('currentUser');
   }
 
-  public notifyLogged(user): void{
+  public notifyLogged(): void{
     if(sessionStorage.getItem('currentUser')){
-      this.userRepository.next(user);
+      this.userRepository.next(true);
     }else{
-      this.userRepository.next(null);
+      this.userRepository.next(false);
     }
   }
 
-  public listenLogged(): Observable<String>{
+  public listenLogged(): Observable<Boolean>{
     return this.userRepository.asObservable();
   }
 }
