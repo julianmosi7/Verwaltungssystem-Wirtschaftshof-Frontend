@@ -20,36 +20,11 @@ const ASSIGNMENT_DATA: AssignmentDto[] = [
 })
 export class AuftragserfassungComponent implements OnInit {
 
-  constructor(private auftragsservice: AuftragserfassungService, private authenticationService: AuthenticationService) {
-  }
-
-  //#region Getter
-
-  get municipal() {
-    return this.assignmentFormGroup.get('municipal');
-  }
-
-  get costcenter() {
-    return this.assignmentFormGroup.get('costcenter');
-  }
-
-  get user() {
-    return this.assignmentFormGroup.get('personal');
-  }
-
-
-  get email() {
-    return this.assignmentFormGroup.get('email');
-  }
-
-  get assignmentDescription() {
-    return this.assignmentFormGroup.get('assignmentDescription');
-  }
 
   static user: UserDto;
   validityButton: Boolean = true;
 
-  displayedColumns: string[] = ['assignmentId', 'municipal', 'costcenter', 'email',
+  displayedColumns: string[] = ['assignment_id', 'municipal', 'costcenter', 'email',
   'assignmentLink', 'assignmentDescription', 'personal', 'start', 'duration', 'end', 'progress',
   'status', 'btnAccept', 'btnDelete'];
   // dataSource = ASSIGNMENT_DATA;
