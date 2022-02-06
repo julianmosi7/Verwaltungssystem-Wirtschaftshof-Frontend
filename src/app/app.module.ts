@@ -17,6 +17,15 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { CoreModule } from './core/core.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { AuftragserfassungDialogComponent } from './components/auftragserfassung-dialog/auftragserfassung-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDivider, MatDividerModule } from '@angular/material/divider';
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatNativeDateModule } from '@angular/material/core';
+
+
 
 
 
@@ -27,9 +36,11 @@ import { MatIconModule } from '@angular/material/icon';
     HomeComponent,
     NavbarComponent,
     AuftragszuweisungComponent,
+    AuftragserfassungDialogComponent,
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
@@ -39,7 +50,13 @@ import { MatIconModule } from '@angular/material/icon';
     AuthenticationModule,
     CoreModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   exports: [

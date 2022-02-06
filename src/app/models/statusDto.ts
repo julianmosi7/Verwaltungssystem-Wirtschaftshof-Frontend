@@ -1,4 +1,4 @@
-export class Status{
+export class StatusDto{
     statusId: number;
     description: string;
 }

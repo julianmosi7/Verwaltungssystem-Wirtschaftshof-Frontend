@@ -1,5 +1,5 @@
 export class CostcenterDto{
-    costcenterId: number;
+    costCenterId: number;
     cost_id: string;
     description: string;
     category: string;

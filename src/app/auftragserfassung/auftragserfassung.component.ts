@@ -1,12 +1,14 @@
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { AuftragserfassungDialogComponent } from '../components/auftragserfassung-dialog/auftragserfassung-dialog.component';
 import { AuftragserfassungService } from '../core/auftragserfassung.service';
 import { AssignmentDto } from '../models/assignmentDto';
 import { CostcenterDto } from '../models/costcenterDto';
 import { MunicipalDto } from '../models/municipalDto';
 import { RoleDto } from '../models/roleDto';
-import { Status } from '../models/statusDto';
+import { StatusDto } from '../models/statusDto';
 import { UserDto } from '../models/userDto';
 
 const ASSIGNMENT_DATA: AssignmentDto[] = [
@@ -19,15 +21,13 @@ const ASSIGNMENT_DATA: AssignmentDto[] = [
   styleUrls: ['./auftragserfassung.component.css']
 })
 export class AuftragserfassungComponent implements OnInit {
-
-
   static user: UserDto;
+
   validityButton: Boolean = true;
 
   displayedColumns: string[] = ['assignment_id', 'municipal', 'costcenter', 'email',
   'assignmentLink', 'assignmentDescription', 'personal', 'start', 'duration', 'end', 'progress',
-  'status', 'btnAccept', 'btnDelete'];
-  // dataSource = ASSIGNMENT_DATA;
+  'status', 'btnAccept', 'btnDelete', 'btnEdit'];
 
   assignments: AssignmentDto[] = [];
 
@@ -37,7 +37,6 @@ export class AuftragserfassungComponent implements OnInit {
     municipal: new FormControl('', Validators.required),
     costcenter: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
-    path: new FormControl(''),
     assignmentLink: new FormControl(''),
     assignmentDescription: new FormControl('', Validators.required),
     personal: new FormControl(''),
@@ -49,18 +48,18 @@ export class AuftragserfassungComponent implements OnInit {
     approved: new FormControl('')
   });
 
-
   municipals: MunicipalDto[] = [];
 
   costcenters: CostcenterDto[] = [];
 
-  status: Status[] = [];
+  status: StatusDto[] = [];
 
   assignment: AssignmentDto;
 
   staff: UserDto[] = [];
 
-  constructor(private auftragsservice: AuftragserfassungService) { }
+  constructor(private auftragsservice: AuftragserfassungService,
+    public dialog: MatDialog) { }
 
   //#region Getter
 
@@ -75,6 +74,7 @@ export class AuftragserfassungComponent implements OnInit {
   get email(){
     return this.assignmentFormGroup.get('email');
   }
+
   get assignmentDescription(){
     return this.assignmentFormGroup.get('assignmentDescription');
   }
@@ -132,14 +132,11 @@ export class AuftragserfassungComponent implements OnInit {
       assignmentDescription: this.assignmentFormGroup.get('assignmentDescription').value,
       personal: this.assignmentFormGroup.get('personal').value,
       start: this.assignmentFormGroup.get('start').value,
-     // duration: this.assignmentFormGroup.get('duration').value,
       end: this.assignmentFormGroup.get('end').value,
       progress: this.assignmentFormGroup.get('progress').value,
       status: this.assignmentFormGroup.get('status').value,
       approved: false
     };
-
-    console.log(typeof this.assignment.end);
 
     this.auftragsservice.saveAssignment(this.assignment).subscribe(x => {
       console.log(x);
@@ -166,9 +163,19 @@ export class AuftragserfassungComponent implements OnInit {
    const startDate = new Date(assignment.start);
    const endDate = new Date(assignment.end);
    const diffInMs = (endDate.getTime() - startDate.getTime());
-   return diffInMs / (1000 * 3600 * 24) + ' Tage';
+   return diffInMs / (1000 * 3600 * 24)+1 + ' Tage';
   }
 
+  openDialogAssignment(x): void{
+    console.log(x);
+    const dialogRef = this.dialog.open(AuftragserfassungDialogComponent, {
+      
+      data: {selectedAssignment: x, municipals: this.municipals, costcenters: this.costcenters, 
+            personal: this.staff, status: this.status}
+    });
 
-
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("The dialog was closed");
+    })
+  }
 }

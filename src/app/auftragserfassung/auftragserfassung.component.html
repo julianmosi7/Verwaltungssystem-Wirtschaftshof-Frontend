@@ -4,8 +4,6 @@
     <div class="row">
       <form [formGroup]="assignmentFormGroup">
         <div class="row justify-content-center">
-
-
           <div class="col-sm-2">
             <mat-form-field>
               <mat-label>Gemeinde</mat-label>
@@ -41,7 +39,6 @@
                   {{ costcenter.description }}
                 </mat-option>
               </mat-select>
-
             </mat-form-field>
             <a [style.color]="!costcenter?.valid && (costcenter?.dirty || costcenter?.touched) ? 'red' : 'black'">
               *
@@ -82,7 +79,6 @@
 
           <div class="col-sm-2">
             <mat-form-field>
-              <!-- use enum, zb.: Krank, Urlaub, Arzt -->
               <mat-label>Auftrag Link</mat-label>
               <input type="text" matInput formControlName="assignmentLink" />
             </mat-form-field>
@@ -250,6 +246,13 @@
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let assignment">
           <button mat-raised-button color="warn" (click)="deleteAssignment(assignment)">Delete</button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="btnEdit">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let assignment">
+          <button mat-raised-button color="accent" (click)="openDialogAssignment(assignment)">Edit</button>
         </td>
       </ng-container>
 

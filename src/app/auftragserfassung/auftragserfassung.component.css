@@ -7,9 +7,16 @@ html,table{
   padding-top: 20px;
 }
 
-
 .validationError{
     color: red;
     text-decoration: none;
     padding-bottom: 10px;
 }
+
+/* .mat-row .mat-cell{
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell{
+  background-color: rgb(241, 241, 241);
+} */

@@ -1,6 +1,6 @@
 import { CostcenterDto } from "./costcenterDto";
 import { MunicipalDto } from "./municipalDto";
-import { Status } from "./statusDto";
+import { StatusDto } from "./statusDto";
 import { UserDto } from "./userDto";
 
 export class AssignmentDto{
@@ -15,6 +15,6 @@ export class AssignmentDto{
     //duration: number;
     end: Date;
     progress: number;
-    status: Status;
+    status: StatusDto;
     approved: boolean;
 }

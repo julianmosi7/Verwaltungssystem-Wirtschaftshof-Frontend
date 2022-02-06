@@ -1,0 +1,127 @@
+<h1 mat-dialog-title> Edit user </h1>
+<div mat-dialog-content>
+    <div class="container-fluid">
+        <div class="row">
+            <form [formGroup]="assignmentFormGroup">
+                <div class="row justify-content-center">
+                    <div class="col-sm">
+                        <mat-form-field>
+                            <mat-label>Gemeinde</mat-label>
+                            <mat-select formControlName="municipal">
+                                <mat-option
+                                  *ngFor="let municipal of data.municipals"
+                                  [value]="municipal.municipalId"
+                                  
+                                >
+                                  {{ municipal.name }}
+                                </mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-sm">
+                        <mat-form-field>
+                            <mat-label>Kostenstelle</mat-label>
+                            <mat-select formControlName="costcenter">
+                              <mat-option
+                                *ngFor="let costcenter of data.costcenters"
+                                [value]="costcenter.costCenterId"
+                              >
+                                {{ costcenter.description }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-sm mb-2">
+                      <mat-divider></mat-divider>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-sm">
+                        <mat-form-field>
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email" />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-sm">
+                        <mat-form-field>
+                          <mat-label>Auftrag Link</mat-label>
+                          <input type="text" matInput formControlName="assignmentLink" />
+                        </mat-form-field>
+                      </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-sm">
+                      <mat-form-field>
+                        <mat-label>Aufgabenbeschreibung</mat-label>
+                        <input type="text" matInput formControlName="assignmentDescription" />
+                      </mat-form-field>
+                    </div>
+          
+                    <div class="col-sm">
+                      <mat-form-field>
+                        <mat-label>Personal Vorschlag</mat-label>
+          
+                        <mat-select formControlName="personal" multiple>
+                          <mat-option *ngFor="let user of data.personal" [value]="user.userId">
+                            {{ user.firstname }} {{ user.lastname }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="row justify-content-center">
+                    <div class="col-sm">
+                      <mat-form-field>
+                        <mat-label>Fortschritt (in %)</mat-label>
+                        <input type="number" matInput formControlName="progress" />
+                      </mat-form-field>
+                    </div>
+          
+                    <div class="col-sm">
+                      <mat-form-field>
+                        <mat-label>Status</mat-label>
+                        <mat-select formControlName="status">
+                          <mat-option *ngFor="let status of data.status" [value]="status.statusId">
+                            {{ status.description }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="row justify-content-center">
+                    <div class="col-sm">
+                      <mat-form-field>
+                        <mat-label>Start</mat-label>
+                        <input matInput [matDatepicker]="startDatePicker" formControlName="start" />
+                        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #startDatePicker></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+          
+                    <div class="col-sm">
+                      <mat-form-field>
+                        <mat-label>End</mat-label>
+                        <input matInput [matDatepicker]="endDatePicker" formControlName="end" />
+                        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #endDatePicker></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                  </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button cdkFocusInitial (click)="updateAssignment()">Update</button>
+</div>
