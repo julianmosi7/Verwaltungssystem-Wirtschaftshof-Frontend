@@ -8,6 +8,7 @@ import { AssignmentDto } from '../models/assignmentDto';
 import { CostcenterDto } from '../models/costcenterDto';
 import { MunicipalDto } from '../models/municipalDto';
 import { RoleDto } from '../models/roleDto';
+import { SendAssignmentDto } from '../models/sendAssignmentDto';
 import { StatusDto } from '../models/statusDto';
 import { UserDto } from '../models/userDto';
 
@@ -54,7 +55,7 @@ export class AuftragserfassungComponent implements OnInit {
 
   status: StatusDto[] = [];
 
-  assignment: AssignmentDto;
+  assignment: SendAssignmentDto;
 
   staff: UserDto[] = [];
 
@@ -125,8 +126,8 @@ export class AuftragserfassungComponent implements OnInit {
     console.log('save assignment...');
     this.assignment = {
       assignment_id: null,
-      costcenter: this.assignmentFormGroup.get('costcenter').value,
-      municipal: this.assignmentFormGroup.get('municipal').value,
+      costCenterId: this.assignmentFormGroup.get('costcenter').value,
+      municipalId: this.assignmentFormGroup.get('municipal').value,
       email: this.assignmentFormGroup.get('email').value,
       link: this.assignmentFormGroup.get('assignmentLink').value,
       assignmentDescription: this.assignmentFormGroup.get('assignmentDescription').value,
@@ -176,6 +177,7 @@ export class AuftragserfassungComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log("The dialog was closed");
+      this.loadAssignments();
     })
   }
 }

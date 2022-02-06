@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuftragserfassungService } from 'src/app/core/auftragserfassung.service';
 import { AssignmentDialogData } from 'src/app/models/assignmentDialogData';
 import { AssignmentDto } from 'src/app/models/assignmentDto';
+import { SendAssignmentDto } from 'src/app/models/sendAssignmentDto';
 import { UserDto } from 'src/app/models/userDto';
 
 @Component({
@@ -13,7 +14,7 @@ import { UserDto } from 'src/app/models/userDto';
 })
 export class AuftragserfassungDialogComponent implements OnInit {
 
-  assignment: AssignmentDto;
+  assignment: SendAssignmentDto;
 
   assignmentFormGroup = new FormGroup({
     municipal: new FormControl(this.data.selectedAssignment.municipal.municipalId, Validators.required),
@@ -60,8 +61,8 @@ export class AuftragserfassungDialogComponent implements OnInit {
     console.log(this.assignmentFormGroup);
     this.assignment = {
       assignment_id: null,
-      costcenter: this.assignmentFormGroup.get('costcenter').value,
-      municipal: this.assignmentFormGroup.get('municipal').value,
+      costCenterId: this.assignmentFormGroup.get('costcenter').value,
+      municipalId: this.assignmentFormGroup.get('municipal').value,
       email: this.assignmentFormGroup.get('email').value,
       link: this.assignmentFormGroup.get('assignmentLink').value,
       assignmentDescription: this.assignmentFormGroup.get('assignmentDescription').value,
@@ -77,6 +78,7 @@ export class AuftragserfassungDialogComponent implements OnInit {
 
     this.auftragsservice.updateAssignment(this.data.selectedAssignment.assignment_id, this.assignment).subscribe(x => {
       console.log(x);
+      this.dialogRef.close();
     })
   }
 }

@@ -8,6 +8,7 @@ import { costcenterDto } from '../models/costcenterDto';
 import { StatusDto } from '../models/statusDto';
 import { AssignmentDto } from '../models/assignmentDto';
 import {UserDto} from '../models/userDto';
+import { SendAssignmentDto } from '../models/sendAssignmentDto';
 
 
 @Injectable({
@@ -46,12 +47,12 @@ export class AuftragserfassungService {
     return this.http.delete<AssignmentDto>(`${this.url}/assignment/deleteAssignment/${assignmentId}`);
   }
 
-  saveAssignment(assignment: AssignmentDto): Observable<AssignmentDto>{
+  saveAssignment(assignment: SendAssignmentDto): Observable<AssignmentDto>{
     console.log(`assignment: ${assignment}`);
     return this.http.post<AssignmentDto>(`${this.url}/assignment/newAssignment`, assignment);
   }
 
-  updateAssignment(assignmentId: number, assignment: AssignmentDto): Observable<AssignmentDto>{
+  updateAssignment(assignmentId: number, assignment: SendAssignmentDto): Observable<AssignmentDto>{
     return this.http.put<AssignmentDto>(`${this.url}/assignment/updateAssignment/${assignmentId}`, assignment);
   }
 
