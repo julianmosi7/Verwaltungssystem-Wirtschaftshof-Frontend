@@ -1,206 +1,98 @@
 
 <div class="row text-center">
-    <div class="col-md-4">
-      <div class="btn-group">
-        <div
-          class="btn btn-primary"
-          mwlCalendarPreviousView
-          [view]="view"
-          [(viewDate)]="viewDate"
-          (viewDateChange)="closeOpenMonthViewDay()"
-        >
-          Previous
-        </div>
-        <div
-          class="btn btn-outline-secondary"
-          mwlCalendarToday
-          [(viewDate)]="viewDate"
-        >
-          Today
-        </div>
-        <div
-          class="btn btn-primary"
-          mwlCalendarNextView
-          [view]="view"
-          [(viewDate)]="viewDate"
-          (viewDateChange)="closeOpenMonthViewDay()"
-        >
-          Next
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'de' }}</h3>
-    </div>
-    <div class="col-md-4">
-      <div class="btn-group">
-        <div
-          class="btn btn-primary"
-          (click)="setView(CalendarView.Month)"
-          [class.active]="view === CalendarView.Month"
-        >
-          Month
-        </div>
-        <div
-          class="btn btn-primary"
-          (click)="setView(CalendarView.Week)"
-          [class.active]="view === CalendarView.Week"
-        >
-          Week
-        </div>
-        <div
-          class="btn btn-primary"
-          (click)="setView(CalendarView.Day)"
-          [class.active]="view === CalendarView.Day"
-        >
-          Day
-        </div>
-      </div>
-    </div>
-  </div>
-  <br />
-  <div [ngSwitch]="view">
-    <mwl-calendar-month-view
-      *ngSwitchCase="CalendarView.Month"
-      [viewDate]="viewDate"
-      [events]="events"
-      [refresh]="refresh"
-      [activeDayIsOpen]="activeDayIsOpen"
-      (dayClicked)="dayClicked($event.day)"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-    >
-    </mwl-calendar-month-view>
-    <mwl-calendar-week-view
+  <h1>Dienstplan</h1>
+<app-scheduler></app-scheduler>
+  <mat-divider></mat-divider>
+  <h1>Nicht zugewiesene Aufträge</h1>
+  <div class="container-footer">
+    <table mat-table [dataSource]="assignments" class="content">
+      <ng-container matColumnDef="assignment_id">
+        <th mat-header-cell *matHeaderCellDef>Auftragsnummer</th>
+        <td mat-cell *matCellDef="let assignment">{{ assignment.assignment_id }}</td>
+      </ng-container>
 
-      *ngSwitchCase="CalendarView.Week"
-      [viewDate]="viewDate"
-      [events]="events"
-      [refresh]="refresh"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-    >
-    </mwl-calendar-week-view>
-    <mwl-calendar-day-view
-      *ngSwitchCase="CalendarView.Day"
-      [viewDate]="   viewDate"
-      [events]="events"
-      [refresh]="refresh"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-    >
-    </mwl-calendar-day-view>
-  </div>
+      <ng-container matColumnDef="municipal">
+        <th mat-header-cell *matHeaderCellDef>Gemeinde</th>
+        <td mat-cell *matCellDef="let assignment">
+          {{ assignment.municipal.name }}
+        </td>
+      </ng-container>
 
-  <br /><br /><br />
+      <ng-container matColumnDef="costcenter">
+        <th mat-header-cell *matHeaderCellDef>Kostenstelle</th>
+        <td mat-cell *matCellDef="let assignment">{{ assignment.costcenter.cost_id }}</td>
+      </ng-container>
 
-  <h3>
-    Auftrag bearbeiten
-    <button class="btn btn-primary float-right" (click)="addEvent()">
-      Neues Event
-    </button>
-    <div class="clearfix"></div>
-  </h3>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let assignment">{{ assignment.email }}</td>
+      </ng-container>
 
-  <div class="table-responsive">
-    <table class="table table-bordered">
-      <thead>
-      <tr>
-        <th>Titel</th>
-        <th>Primary color</th>
-        <th>Secondary color</th>
-        <th>Beginnt am</th>
-        <th>Endet am</th>
-        <th>Löschen</th>
-      </tr>
-      </thead>
+      <ng-container matColumnDef="assignmentLink">
+        <th mat-header-cell *matHeaderCellDef>Auftrag Link</th>
+        <td mat-cell *matCellDef="let assignment">
+          {{ assignment.link }}
+        </td>
+      </ng-container>
 
-      <tbody>
-      <tr *ngFor="let event of events">
-        <td>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="event.title"
-            (keyup)="refresh.next()"
-          />
+      <ng-container matColumnDef="assignmentDescription">
+        <th mat-header-cell *matHeaderCellDef>Auftrag</th>
+        <td mat-cell *matCellDef="let assignment">{{ assignment.assignmentDescription }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="personal">
+        <th mat-header-cell *matHeaderCellDef>Personal Vorschlag</th>
+        <td mat-cell *matCellDef="let assignment">
+          <div *ngFor="let user of assignment.personal">
+            {{ user.firstname }} {{ user.lastname }}
+          </div>
         </td>
-        <td>
-          <input
-            type="color"
-            [(ngModel)]="event.color.primary"
-            (change)="refresh.next()"
-          />
+      </ng-container>
+
+      <ng-container matColumnDef="start">
+        <th mat-header-cell *matHeaderCellDef>Start</th>
+        <td mat-cell *matCellDef="let assignment">{{ assignment.start | date: 'dd.MM.yyyy' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="duration">
+        <th mat-header-cell *matHeaderCellDef>Dauer</th>
+        <td mat-cell *matCellDef="let assignment">{{calculateDiff(assignment)}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="end">
+        <th mat-header-cell *matHeaderCellDef>Ende</th>
+        <td mat-cell *matCellDef="let assignment">{{ assignment.end | date: 'dd.MM.yyyy' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="progress">
+        <th mat-header-cell *matHeaderCellDef>Fortschritt</th>
+        <td mat-cell *matCellDef="let assignment">{{ assignment.progress }} %</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let assignment">{{ assignment.status.description }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="btnDelete">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let assignment">
+          <button mat-raised-button color="warn" (click)="deleteAssignment(assignment)">Delete</button>
         </td>
-        <td>
-          <input
-            type="color"
-            [(ngModel)]="event.color.secondary"
-            (change)="refresh.next()"
-          />
+      </ng-container>
+
+      <ng-container matColumnDef="btnEdit">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let assignment">
+          <button mat-raised-button color="accent" (click)="openDialogAssignment(assignment)">Edit</button>
         </td>
-        <td>
-          <input
-            class="form-control"
-            type="text"
-            mwlFlatpickr
-            [(ngModel)]="event.start"
-            (ngModelChange)="refresh.next()"
-            [altInput]="true"
-            [convertModelValue]="true"
-            [enableTime]="true"
-            dateFormat="Y-m-dTH:i"
-            altFormat="F j, Y H:i"
-            placeholder="Not set"
-          />
-        </td>
-        <td>
-          <input
-            class="form-control"
-            type="text"
-            mwlFlatpickr
-            [(ngModel)]="event.end"
-            (ngModelChange)="refresh.next()"
-            [altInput]="true"
-            [convertModelValue]="true"
-            [enableTime]="true"
-            dateFormat="Y-m-dTH:i"
-            altFormat="F j, Y H:i"
-            placeholder="Not set"
-          />
-        </td>
-        <td>
-          <button class="btn btn-danger" (click)="deleteEvent(event)">
-            Löschen
-          </button>
-        </td>
-      </tr>
-      </tbody>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
+  </div>
 
-    <ng-template #modalContent let-close="close">
-      <div class="modal-header">
-        <h5 class="modal-title">Event action occurred</h5>
-        <button type="button" class="close" (click)="close()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div>
-          Action:
-          <pre>{{ modalData?.action }}</pre>
-        </div>
-        <div>
-          Event:
-          <pre>{{ modalData?.event | json }}</pre>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" (click)="close()">
-          OK
-        </button>
-      </div>
-    </ng-template>
   </div>
 
 

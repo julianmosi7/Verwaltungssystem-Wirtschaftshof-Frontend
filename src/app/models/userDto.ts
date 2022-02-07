@@ -13,6 +13,5 @@ export class UserDto{
     birthdate: Date;
     role: RoleDto;
     licence: LicenceDto[];
-    holidays: HolidayDto[];
     assignments: AssignmentDto[];
 }

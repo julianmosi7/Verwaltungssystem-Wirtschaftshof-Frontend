@@ -5,6 +5,9 @@ import { tap } from 'rxjs/operators';
 import { AuthenticationDto } from '../models/authenticationDto';
 import { TokenDto } from '../models/tokenDto';
 import jwt_decode from "jwt-decode";
+import {SendAssignmentDto} from '../models/sendAssignmentDto';
+import {AssignmentDto} from '../models/assignmentDto';
+import {UserDto} from '../models/userDto';
 
 
 @Injectable({
@@ -44,5 +47,10 @@ export class AuthenticationService {
 
   public listenLogged(): Observable<Boolean>{
     return this.userRepository.asObservable();
+  }
+
+  public register(user: UserDto): Observable<UserDto>{
+    console.log(`user: ${user.username}`);
+    return this.http.post<UserDto>(`${this.url}/rest/user/newUser`, user);
   }
 }

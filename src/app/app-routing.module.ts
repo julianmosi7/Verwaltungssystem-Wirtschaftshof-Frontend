@@ -9,7 +9,7 @@ import {AuftragserfassungComponent} from "./auftragserfassung/auftragserfassung.
 import { AuthGuard } from './core/auth.guard';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent },
   {path: 'register', component: RegisterComponent },
   {path: 'auftragszuweisung', component: AuftragszuweisungComponent},

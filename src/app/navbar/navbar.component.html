@@ -5,7 +5,7 @@
     <img class="logo" src="../../../assets/wpupping.png">
     <img class="logo" src="../../../assets/wstroheim.png">
   </div>
-  
+
   <a class="navbar-brand" href="/home">Verwaltungssoftware Wirtschaftshof</a>
   <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -19,25 +19,26 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/auftragserfassung">Auftragserfassung<span class="sr-only"></span></a>
       </li>
-      <li class="nav-item">
+      <!--<li class="nav-item">
         <a class="nav-link" routerLink="/auftragszuweisung">Auftragszuweisung<span class="sr-only"></span></a>
-      </li>
+      </li>-->
     </ul>
 
     <div class="right-container">
       <div class="flex-container">
         <mat-icon aria-hidden="false" aria-label="user">person</mat-icon>
-        <a style="text-decoration: none; color: black;"><i>{{currentUser}}</i></a> 
+        <a style="text-decoration: none; color: black;"><i>{{currentUser}}</i></a>
       </div>
 
       <button mat-raised-button color="basic" routerLink="/login" *ngIf="!currentUser">Login</button>
       <button mat-raised-button color="warn" routerLink="/login" (click)="logout()" *ngIf="currentUser">Logout</button>
+      <button mat-raised-button color="basic" routerLink="/register" >Register</button>
     </div>
   </div>
-  
-   
-    
-    
-  
+
+
+
+
+
 
 </nav>

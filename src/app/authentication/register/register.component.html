@@ -1,9 +1,6 @@
 <div class="container px-2 py-5 mx-auto">
-  <div class="card card0">
-    <div class="d-flex flex-lg-row ">
-      <div class="card card1">
-        <div class="row justify-content-center my-auto">
-          <div class="col-md-8 col-10 my-5">
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-4 my-5">
             <div class="row justify-content-center px-3 mb-3">
               <img class="logo" src="../../../assets/waschach.jpeg">
               <img class="logo" src="../../../assets/whartkirchen.gif">
@@ -12,67 +9,87 @@
             </div>
             <h3 class="mb-5 text-center heading">Wirtschaftshof Verwaltung</h3>
 
-            <h6 class="msg-info">Neuer Benutzer</h6>
+            <form [formGroup]="userData">
+              <div class="row justify-content-center">
 
-            <div class="form-group">
-              <label class="control-label text-muted">Vorname</label>
-              <div class="input-group">
-                <input type="text" id="vorname" name="vorname" placeholder="Vorname" class="form-control">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label text-muted">Nachname</label>
-              <div class="input-group">
-                <input type="text" id="nachname" name="nachname" placeholder="Nachname" class="form-control">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="form-control-label text-muted">Benutzername</label>
-              <div class="input-group">
-                <div class="input-group-addon">
-                  <span class="input-group-text" >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="36" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 20 20">
-                      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
-                      <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"></path>
-                  </svg>
-                  </span>
+                <div class="col-sm-3">
+                  <mat-label>Passwort</mat-label>
+                  <input type="password" id="password" name="password" placeholder="Passwort" formControlName="password">
                 </div>
-                <input type="text" id="email" name="email" placeholder="Email" class="form-control">
-              </div>
-            </div>
 
-            <div class="form-group">
-              <label class="form-control-label text-muted">Passwort</label>
-              <div class="input-group">
-                <div class="input-group-addon">
-                  <span class="input-group-text" >
-                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="36" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
-                  <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                </svg>
-              </span>
+                <div class="col-sm-3">
+                  <mat-label>Benutzername</mat-label>
+                  <input type="text" id="username" name="username" placeholder="username" formControlName="username">
                 </div>
-                <input type="password" id="psw" name="psw" placeholder="Passwort" class="form-control">
+
               </div>
-            </div>
+
+              <div class="row justify-content-center">
+                <div class="col-sm-4 mb-3">
+                  <mat-divider></mat-divider>
+                </div>
+              </div>
+
+              <div class="row justify-content-center">
+                <div class="col-sm-3">
+                  <mat-label>Vorname</mat-label>
+                  <input type="text" id="vorname" name="vorname" placeholder="Vorname" formControlName="firstname">
+                </div>
+
+
+                <div class="col-sm-3">
+                  <mat-label>Nachname</mat-label>
+                  <input type="text" id="nachname" name="nachname" placeholder="Nachname" formControlName="lastname"/>
+                </div>
+
+              </div>
+
+
+
+                <div class="row justify-content-center">
+                <div class="col-sm-3">
+                <mat-form-field>
+                  <mat-label>Birthdate</mat-label>
+                  <input matInput [matDatepicker]="birthdatePicker"  formControlName="birthdate"/>
+                  <mat-datepicker-toggle matSuffix [for]="birthdatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #birthdatePicker></mat-datepicker>
+                </mat-form-field>
+                </div>
+
+
+                <div class="col-sm-3">
+            <mat-form-field>
+              <mat-label>Rolle</mat-label>
+              <mat-select formControlName="role">
+                <mat-option
+                  *ngFor="let role of roles"
+                  [value]="role.roleID"
+                >
+                  {{ role.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+                </div>
+
+
+                <div class="row justify-content-center">
+                  <div class="col-sm-3">
+                    <mat-label>Email</mat-label>
+                    <input type="text" id="email" name="email" placeholder="Mail" formControlName="email">
+                  </div>
+
+                  <div class="col-sm-3">
+                    <button  (click)="register()" class="btn-block btn-color">Registrieren</button>
+                  </div>
+                  </div>
+
+              </div>
+            </form>
 
           </div>
         </div>
-        <div class="bottom text-center mb-5">
-          <button  (click)="register()" class="btn-block btn-color">Registrieren</button>
-        </div>
+
       </div>
-      <div class="card card2">
-        <div class="my-auto mx-md-5 px-md-5 right">
-          <div class="row justify-content-center px-3 mb-3"> <img src="assets/wh.jpeg" class="img-responsive"  />
-            <h3 class="textu">Wirtschaftshof Aschachtal</h3> <small class="textu">Gemeinden: Aschach, Hartkirchen, Pupping, Stroheim</small>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 

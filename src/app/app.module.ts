@@ -20,10 +20,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { AuftragserfassungDialogComponent } from './components/auftragserfassung-dialog/auftragserfassung-dialog.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatDivider, MatDividerModule } from '@angular/material/divider';
-import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+
+
+import {MatTableModule} from '@angular/material/table';
+import {SchedulerModule} from './scheduler/scheduler.module';
 
 
 
@@ -56,7 +60,11 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatButtonModule,
     MatDividerModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SchedulerModule,
+    MatTableModule
   ],
   providers: [],
   exports: [

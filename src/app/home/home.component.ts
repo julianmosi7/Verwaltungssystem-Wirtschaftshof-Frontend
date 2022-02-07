@@ -1,196 +1,91 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef,
-} from '@angular/core';
-import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
-  isSameDay,
-  isSameMonth,
-  addHours,
-} from 'date-fns';
-import { Subject } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent,
-  CalendarView,
-} from 'angular-calendar';
+import {Component, OnInit, ViewChild} from '@angular/core';
 
-const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
-  },
-};
+import {MatDialog} from '@angular/material/dialog';
+import {UserDto} from '../models/userDto';
+import {AssignmentDto} from '../models/assignmentDto';
+import {MunicipalDto} from '../models/municipalDto';
+import {CostcenterDto} from '../models/costcenterDto';
+import {StatusDto} from '../models/statusDto';
+import {SendAssignmentDto} from '../models/sendAssignmentDto';
+import {AuftragserfassungService} from '../core/auftragserfassung.service';
+import {AuftragserfassungDialogComponent} from '../components/auftragserfassung-dialog/auftragserfassung-dialog.component';
+
 
 @Component({
   selector: 'app-home',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
-  view: CalendarView = CalendarView.Month;
+export class HomeComponent implements OnInit {
 
-  CalendarView = CalendarView;
+  static user: UserDto;
 
-  viewDate: Date = new Date();
 
-  modalData: {
-    action: string;
-    event: CalendarEvent;
-  };
+  displayedColumns: string[] = ['assignment_id', 'municipal', 'costcenter', 'email',
+    'assignmentLink', 'assignmentDescription', 'personal', 'start', 'duration', 'end', 'progress',
+    'status', 'btnDelete', 'btnEdit'];
 
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      },
-    },
-  ];
+  assignments: AssignmentDto[] = [];
 
-  refresh: Subject<any> = new Subject();
+  dataSource = this.assignments;
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-  ];
+  municipals: MunicipalDto[] = [];
 
-  activeDayIsOpen = true;
+  costcenters: CostcenterDto[] = [];
 
-  constructor(private modal: NgbModal) {}
+  status: StatusDto[] = [];
 
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-      }
-      this.viewDate = date;
-    }
-  }
+  assignment: SendAssignmentDto;
 
-  eventTimesChanged({
-    event,
-    newStart,
-    newEnd,
-  }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map((iEvent) => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
-      }
-      return iEvent;
+  staff: UserDto[] = [];
+
+  constructor(private auftragsservice: AuftragserfassungService,
+              public dialog: MatDialog) { }
+
+
+
+  ngOnInit(): void {
+    this.auftragsservice.getUserss().subscribe(x => {
+      console.log(x);
+      this.staff = x;
     });
-    this.handleEvent('Dropped or resized', event);
+    this.loadAssignments();
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+  loadAssignments() {
+    this.auftragsservice.getAllAssignmentsApproved().subscribe(x => {
+      console.log(x);
+      this.assignments = x;
+      this.dataSource = this.assignments;
+    });
   }
 
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
+  deleteAssignment(assignment: AssignmentDto){
+    this.auftragsservice.deleteAssignment(assignment.assignment_id).subscribe(x => {
+      console.log(x);
+      this.loadAssignments();
+    });
   }
 
-  // tslint:disable-next-line:typedef
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter((event) => event !== eventToDelete);
+  calculateDiff( assignment: AssignmentDto) {
+    const startDate = new Date(assignment.start);
+    const endDate = new Date(assignment.end);
+    const diffInMs = (endDate.getTime() - startDate.getTime());
+    return diffInMs / (1000 * 3600 * 24) + 1 + ' Tage';
   }
 
-  // tslint:disable-next-line:typedef
-  setView(view: CalendarView) {
-    this.view = view;
+  openDialogAssignment(x): void{
+    console.log(x);
+    const dialogRef = this.dialog.open(AuftragserfassungDialogComponent, {
+
+      data: {selectedAssignment: x, municipals: this.municipals, costcenters: this.costcenters,
+        personal: this.staff, status: this.status}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.loadAssignments();
+    });
   }
 
-  // tslint:disable-next-line:typedef
-  closeOpenMonthViewDay() {
-    this.activeDayIsOpen = false;
-  }
-
-  logout() {}
 }

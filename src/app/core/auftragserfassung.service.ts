@@ -8,7 +8,12 @@ import { costcenterDto } from '../models/costcenterDto';
 import { StatusDto } from '../models/statusDto';
 import { AssignmentDto } from '../models/assignmentDto';
 import {UserDto} from '../models/userDto';
+import {userDataCalDto} from '../models/UserDataCalDto';
+import {DayPilot} from 'daypilot-pro-angular';
+import ResourceData = DayPilot.ResourceData;
+
 import { SendAssignmentDto } from '../models/sendAssignmentDto';
+import {RoleDto} from '../models/roleDto';
 
 
 @Injectable({
@@ -18,6 +23,7 @@ export class AuftragserfassungService {
   url = 'http://localhost:8081/rest';
 
   constructor(private http: HttpClient) { }
+
 
   getMunicipals(): Observable<MunicipalDto[]>{
     return this.http.get<MunicipalDto[]>(`${this.url}/municipal/getAll`);
@@ -35,12 +41,30 @@ export class AuftragserfassungService {
     return this.http.get<UserDto[]>(`${this.url}/user/getAll`);
   }
 
+  getRoles(): Observable<RoleDto[]>{
+    return this.http.get<RoleDto[]>(`${this.url}/role/getAll`);
+  }
+
+  getAssignemntsFromUser(userID: number): Observable<AssignmentDto[]>{
+    return this.http.get <AssignmentDto[]>(`${this.url}/user/getAssignments/${userID}`) ;
+  }
+
+  getUsersCal(): Observable<any[]> {
+    return this.http.get(`${this.url}/user/getAllCal`) as Observable<any>;
+  }
+
+
+
   getAssignments(): Observable<AssignmentDto[]>{
     return this.http.get<AssignmentDto[]>(`${this.url}/assignment/getAll`);
   }
 
   getAllAssignmentsNotApproved(): Observable<AssignmentDto[]>{
     return this.http.get<AssignmentDto[]>(`${this.url}/assignment/getAllNotApproved`);
+  }
+
+  getAllAssignmentsApproved(): Observable<AssignmentDto[]>{
+    return this.http.get<AssignmentDto[]>(`${this.url}/assignment/getAllApproved`);
   }
 
   deleteAssignment(assignmentId: number): Observable<AssignmentDto>{
@@ -60,8 +84,7 @@ export class AuftragserfassungService {
     return this.http.get<AssignmentDto>(`${this.url}/assignment/approveAssignment/${assignmentId}`);
   }
 
-  getUserByUsername(username: String): Observable<UserDto>{
+  getUserByUsername(username: string): Observable<UserDto>{
     return this.http.get<UserDto>(`${this.url}/user/getUserByUsername/${username}`);
   }
-
 }

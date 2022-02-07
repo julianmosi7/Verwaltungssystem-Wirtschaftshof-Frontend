@@ -107,7 +107,6 @@ export class AuftragserfassungComponent implements OnInit {
       this.staff = x;
     });
     this.loadAssignments();
-
   }
 
   loadAssignments() {
@@ -170,14 +169,14 @@ export class AuftragserfassungComponent implements OnInit {
   openDialogAssignment(x): void{
     console.log(x);
     const dialogRef = this.dialog.open(AuftragserfassungDialogComponent, {
-      
-      data: {selectedAssignment: x, municipals: this.municipals, costcenters: this.costcenters, 
+
+      data: {selectedAssignment: x, municipals: this.municipals, costcenters: this.costcenters,
             personal: this.staff, status: this.status}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log("The dialog was closed");
       this.loadAssignments();
-    })
+    });
   }
 }
