@@ -70,7 +70,7 @@ export class AuftragserfassungDialogComponent implements OnInit {
       start: this.assignmentFormGroup.get('start').value,
       end: this.assignmentFormGroup.get('end').value,
       progress: this.assignmentFormGroup.get('progress').value,
-      status: this.assignmentFormGroup.get('status').value,
+      statusId: this.assignmentFormGroup.get('status').value,
       approved: false
     };
 

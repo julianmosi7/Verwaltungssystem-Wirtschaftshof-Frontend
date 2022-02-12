@@ -9,6 +9,6 @@ export class SendAssignmentDto{
     start: Date;
     end: Date;
     progress: number;
-    status: number;
+    statusId: number;
     approved: boolean;
 }

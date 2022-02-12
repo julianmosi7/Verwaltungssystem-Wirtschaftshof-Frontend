@@ -1,3 +1,4 @@
+<div class="row text-center">
 <div class="container px-2 py-5 mx-auto">
         <div class="row justify-content-center">
           <div class="col-md-8 col-4 my-5">
@@ -11,6 +12,8 @@
 
             <form [formGroup]="userData">
               <div class="row justify-content-center">
+
+                <h1>Neuer Benutzer</h1>
 
                 <div class="col-sm-3">
                   <mat-label>Passwort</mat-label>
@@ -79,7 +82,7 @@
                   </div>
 
                   <div class="col-sm-3">
-                    <button  (click)="register()" class="btn-block btn-color">Registrieren</button>
+                    <button mat-raised-button color="basic" (click)="register()" >Registrieren</button>
                   </div>
                   </div>
 
@@ -90,6 +93,8 @@
         </div>
 
       </div>
+
+</div>
 
 
 

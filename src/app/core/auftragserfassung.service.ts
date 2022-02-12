@@ -53,8 +53,6 @@ export class AuftragserfassungService {
     return this.http.get(`${this.url}/user/getAllCal`) as Observable<any>;
   }
 
-
-
   getAssignments(): Observable<AssignmentDto[]>{
     return this.http.get<AssignmentDto[]>(`${this.url}/assignment/getAll`);
   }
